@@ -1,10 +1,10 @@
 services:
-  ruwork.mailer:
-    class: Ruwork\CoreBundle\Mailer\Mailer
+  ruwork.mailer.message_factory:
+    class: Ruwork\CoreBundle\Mailer\MessageFactory
     arguments:
-      - '@mailer'
       - '@twig'
       - '@?translator'
+      - ~
 
   ruwork.monolog.processor.request:
     class: Ruwork\CoreBundle\Monolog\Processor\RequestProcessor
