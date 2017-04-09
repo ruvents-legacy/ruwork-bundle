@@ -4,3 +4,11 @@ services:
     arguments:
       - '@mailer'
       - '@twig'
+
+  ruwork.monolog.processor.request:
+    class: Ruwork\CoreBundle\Monolog\Processor\RequestProcessor
+    public: false
+    arguments:
+      - '@request_stack'
+    tags:
+      - { name: monolog.processor, method: processRecord, channel: request }
