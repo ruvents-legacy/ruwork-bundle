@@ -5,6 +5,7 @@ namespace Ruwork\CoreBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class RuworkCoreExtension extends ConfigurableExtension
@@ -19,5 +20,10 @@ class RuworkCoreExtension extends ConfigurableExtension
 
         $container->findDefinition('ruwork.mailer.message_factory')
             ->replaceArgument(2, $mergedConfig['mailer']['translation_domain']);
+
+        if (null !== $drms = $mergedConfig['security']['default_remember_me_services']) {
+            $container->findDefinition('ruwork.security.auth_helper')
+                ->replaceArgument(4, new Reference($drms));
+        }
     }
 }

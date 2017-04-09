@@ -13,3 +13,12 @@ services:
       - '@request_stack'
     tags:
       - { name: monolog.processor, method: processRecord, channel: request }
+
+  ruwork.security.auth_helper:
+    class: Ruwork\CoreBundle\Security\AuthenticationHelper
+    arguments:
+      - '@security.token_storage'
+      - '@security.user_checker'
+      - '@security.authentication.session_strategy'
+      - '@request_stack'
+      - ~
