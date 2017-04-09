@@ -1,1 +1,6 @@
 services:
+  ruwork.mailer:
+    class: Ruwork\CoreBundle\Mailer\Mailer
+    arguments:
+      - '@mailer'
+      - '@twig'
