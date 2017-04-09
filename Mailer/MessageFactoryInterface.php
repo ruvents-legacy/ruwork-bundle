@@ -5,7 +5,7 @@ namespace Ruwork\CoreBundle\Mailer;
 interface MessageFactoryInterface
 {
     /**
-     * @return MessageBuilder
+     * @return MessageBuilderInterface
      */
     public function createMessageBuilder();
 }
