@@ -16,5 +16,8 @@ class RuworkCoreExtension extends ConfigurableExtension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->findDefinition('ruwork.mailer')
+            ->addMethodCall('setTranslationDomain', [$mergedConfig['mailer']['translation_domain']]);
     }
 }

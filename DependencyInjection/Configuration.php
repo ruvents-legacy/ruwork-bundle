@@ -17,6 +17,15 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->arrayNode('mailer')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('translation_domain')
+                            ->cannotBeEmpty()
+                            ->defaultNull()
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

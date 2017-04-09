@@ -4,6 +4,7 @@ services:
     arguments:
       - '@mailer'
       - '@twig'
+      - '@?translator'
 
   ruwork.monolog.processor.request:
     class: Ruwork\CoreBundle\Monolog\Processor\RequestProcessor
