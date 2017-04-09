@@ -1,0 +1,36 @@
+{
+    "name": "ruwork/core-bundle",
+    "description": "RUWORK Core Bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Valentin Udaltsov",
+            "email": "udaltsov@ruvents.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "symfony/http-foundation": "^3.0",
+        "symfony/http-kernel": "^3.0",
+        "symfony/validator": "^3.0",
+        "symfony/config": "^3.0",
+        "symfony/dependency-injection": "^3.0",
+        "symfony/yaml": "^3.0",
+        "ruvents/doctrine-bundle": "~0.2.1",
+        "egulias/email-validator": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ruwork\\CoreBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}
