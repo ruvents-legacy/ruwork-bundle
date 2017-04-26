@@ -4,15 +4,12 @@ namespace Ruwork\CoreBundle\Doctrine\EntityTrait;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @deprecated Use IdTrait
- */
-trait AutoIdTrait
+trait IdTrait
 {
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue("IDENTITY")
      *
      * @var int
      */
