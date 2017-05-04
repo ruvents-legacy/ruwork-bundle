@@ -22,3 +22,9 @@ services:
       - '@security.authentication.session_strategy'
       - '@request_stack'
       - ~
+
+  ruwork.serializer.encoder.excel_csv:
+    class: Ruwork\CoreBundle\Serializer\Encoder\ExcelCsvEncoder
+    public: false
+    tags:
+      - { name: serializer.encoder }
