@@ -12,6 +12,7 @@ trait AliasTrait
      * @ORM\Column(type="string", unique=true)
      *
      * @Assert\NotBlank()
+     * @Assert\Length(max=255)
      * @Alias()
      *
      * @var string
