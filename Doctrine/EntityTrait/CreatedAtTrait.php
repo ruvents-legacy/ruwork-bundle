@@ -9,7 +9,7 @@ trait CreatedAtTrait
 {
     /**
      * @ORM\Column(type="datetime")
-     * @Timestamp(on={"persist"})
+     * @Timestamp(on={"persist"}, onlyIfNull=true)
      *
      * @var \DateTime
      */
