@@ -28,3 +28,10 @@ services:
     public: false
     tags:
       - { name: serializer.encoder }
+
+  ruwork.validator.alias:
+    class: Ruwork\CoreBundle\Validator\Constraints\AliasValidator
+    arguments:
+      - "@doctrine"
+    tags:
+      - { name: validator.constraint_validator }

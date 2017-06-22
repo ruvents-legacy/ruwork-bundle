@@ -2,38 +2,56 @@
 
 namespace Ruwork\CoreBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraints\Regex;
-use Symfony\Component\Validator\Constraints\RegexValidator;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
  * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  */
-class Alias extends Regex
+class Alias extends Constraint
 {
-    const PATTERN = '#^[a-z0-9-]+$#';
-    const HTML_PATTERN = '^[a-z0-9-]+$';
+    const MATCH_PATTERN = '#^[a-z0-9-]+$#';
+    const HTML_MATCH_PATTERN = '^[a-z0-9-]+$';
     const ROUTE_REQUIREMENT = '[a-z0-9-]+';
     const CLEAN_PATTERN = '#[^a-z0-9-]+#';
 
     /**
      * @var string
      */
-    public $pattern = self::PATTERN;
+    public $pattern = self::MATCH_PATTERN;
 
     /**
-     * {@inheritdoc}
+     * @var string
      */
-    public function getRequiredOptions()
-    {
-        return [];
-    }
+    public $htmlPattern = self::HTML_MATCH_PATTERN;
 
     /**
-     * {@inheritdoc}
+     * @var string
      */
-    public function validatedBy()
-    {
-        return RegexValidator::class;
-    }
+    public $maxLength = 30;
+
+    /**
+     * @var string|null
+     */
+    public $entityClass;
+
+    /**
+     * @var string
+     */
+    public $repositoryMethod = 'findBy';
+
+    /**
+     * @var string
+     */
+    public $regexMessage = 'This value is not valid.';
+
+    /**
+     * @var string
+     */
+    public $maxLengthMessage = 'This value is too long. It should have {{ limit }} character or less.|This value is too long. It should have {{ limit }} characters or less.';
+
+    /**
+     * @var string
+     */
+    public $notUniqueMessage = 'This value is already used.';
 }
