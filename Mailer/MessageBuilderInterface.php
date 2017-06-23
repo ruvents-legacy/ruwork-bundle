@@ -4,7 +4,10 @@ namespace Ruwork\CoreBundle\Mailer;
 
 interface MessageBuilderInterface
 {
-    public function setFrom(MailUserInterface $from): MessageBuilderInterface;
+    /**
+     * @param string|MailUserInterface $from
+     */
+    public function setFrom($from): MessageBuilderInterface;
 
     public function setSubjects(array $subjects): MessageBuilderInterface;
 

@@ -7,9 +7,9 @@ use Twig\Environment;
 class MessageBuilder implements MessageBuilderInterface
 {
     /**
-     * @var \Swift_Mailer
+     * @var Mailer
      */
-    private $swift;
+    private $mailer;
 
     /**
      * @var Environment
@@ -41,17 +41,25 @@ class MessageBuilder implements MessageBuilderInterface
      */
     private $contentType = 'text/html';
 
-    public function __construct(\Swift_Mailer $swift, Environment $twig)
+    public function __construct(Mailer $mailer, Environment $twig)
     {
-        $this->swift = $swift;
+        $this->mailer = $mailer;
         $this->twig = $twig;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFrom(MailUserInterface $from): MessageBuilderInterface
+    public function setFrom($from): MessageBuilderInterface
     {
+        if (is_string($from)) {
+            $from = $this->mailer->getFrom($from);
+        } elseif (!$from instanceof MailUserInterface) {
+            throw new \InvalidArgumentException(
+                sprintf('Argument $from must be a string or an instance of %s', MailUserInterface::class)
+            );
+        }
+
         $this->from = $from;
 
         return $this;
@@ -165,7 +173,7 @@ class MessageBuilder implements MessageBuilderInterface
     public function sendTo(MailUserInterface $to): MessageBuilderInterface
     {
         $message = $this->getMessage($to);
-        $this->swift->send($message);
+        $this->mailer->send($message);
 
         return $this;
     }

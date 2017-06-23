@@ -30,19 +30,18 @@ class Mailer
         }, $from);
     }
 
-    public function buildMessage(string $from = null): MessageBuilderInterface
+    public function getFrom($name): MailUserInterface
     {
-        $builder = new MessageBuilder($this->swift, $this->twig);
-
-        if (null !== $from) {
-            if (!isset($this->fromUsers[$from])) {
-                throw new \OutOfBoundsException(sprintf('Sender "%s" is not registered.', $from));
-            }
-
-            $builder->setFrom($this->fromUsers[$from]);
+        if (!isset($this->fromUsers[$name])) {
+            throw new \OutOfBoundsException(sprintf('Sender "%s" is not registered.', $name));
         }
 
-        return $builder;
+        return $this->fromUsers[$name];
+    }
+
+    public function createMessageBuilder(): MessageBuilderInterface
+    {
+        return new MessageBuilder($this, $this->twig);
     }
 
     public function send(\Swift_Mime_SimpleMessage $message)
