@@ -154,9 +154,12 @@ class MessageBuilder implements MessageBuilderInterface
         $subject = isset($this->subjects[$locale]) ? $this->subjects[$locale] : reset($this->subjects);
         $template = isset($this->templates[$locale]) ? $this->templates[$locale] : reset($this->templates);
         $parameters = array_replace($this->parameters, [
-            '_from' => $from,
-            '_to' => $to,
-            '_subject' => $subject,
+            '_mail' => [
+                'from' => $from,
+                'to' => $to,
+                'subject' => $subject,
+                'locale' => $locale,
+            ],
         ]);
 
         return (new \Swift_Message())
