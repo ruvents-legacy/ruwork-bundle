@@ -69,12 +69,7 @@ class RuworkNamingStrategy implements NamingStrategy
         return $this->classToShortTableName($entityName).'_'.($referencedColumnName ?: $this->referenceColumnName());
     }
 
-    /**
-     * @param string $className
-     *
-     * @return string
-     */
-    private function classToShortTableName($className)
+    private function classToShortTableName(string $className): string
     {
         if (false !== $rpos = strrpos($className, '\\')) {
             $className = substr($className, $rpos + 1);

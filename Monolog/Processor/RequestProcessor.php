@@ -11,20 +11,12 @@ class RequestProcessor
      */
     private $requestStack;
 
-    /**
-     * @param RequestStack $requestStack
-     */
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * @param array $record
-     *
-     * @return array
-     */
-    public function processRecord(array $record)
+    public function processRecord(array $record): array
     {
         $request = $this->requestStack->getCurrentRequest();
 

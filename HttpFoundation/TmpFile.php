@@ -6,10 +6,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class TmpFile extends File
 {
-    /**
-     * @param string|resource $contents
-     */
-    public function __construct($contents)
+    public function __construct(string $contents)
     {
         if (is_resource($contents)) {
             $contents = stream_get_contents($contents, -1, 0);
@@ -19,5 +16,10 @@ class TmpFile extends File
         file_put_contents($pathname, $contents);
 
         parent::__construct($pathname);
+    }
+
+    public static function createFromResource(resource $handle): TmpFile
+    {
+        return new self(stream_get_contents($handle, -1, 0));
     }
 }

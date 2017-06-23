@@ -5,6 +5,7 @@ namespace Ruwork\CoreBundle\Security;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -38,13 +39,6 @@ class AuthenticationHelper
      */
     private $rememberMeServices;
 
-    /**
-     * @param TokenStorageInterface                  $tokenStorage
-     * @param UserCheckerInterface                   $userChecker
-     * @param SessionAuthenticationStrategyInterface $sessionStrategy
-     * @param RequestStack                           $requestStack
-     * @param RememberMeServicesInterface|null       $rememberMeServices
-     */
     public function __construct(
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
@@ -59,12 +53,7 @@ class AuthenticationHelper
         $this->rememberMeServices = $rememberMeServices;
     }
 
-    /**
-     * @param UserInterface $user
-     * @param string        $firewall
-     * @param Response|null $response
-     */
-    public function authenticateUser(UserInterface $user, $firewall, Response $response = null)
+    public function authenticateUser(UserInterface $user, string $firewall, Response $response = null)
     {
         $this->userChecker->checkPreAuth($user);
 
@@ -82,13 +71,7 @@ class AuthenticationHelper
         $this->tokenStorage->setToken($token);
     }
 
-    /**
-     * @param UserInterface $user
-     * @param string        $firewall
-     *
-     * @return UsernamePasswordToken
-     */
-    protected function createToken(UserInterface $user, $firewall)
+    protected function createToken(UserInterface $user, string $firewall): TokenInterface
     {
         return new UsernamePasswordToken($user, null, $firewall, $user->getRoles());
     }

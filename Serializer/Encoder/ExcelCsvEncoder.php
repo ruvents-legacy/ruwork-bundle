@@ -14,14 +14,12 @@ class ExcelCsvEncoder implements EncoderInterface
      */
     private $csvEncoder;
 
-    /**
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $escapeChar
-     * @param string $keySeparator
-     */
-    public function __construct($delimiter = ';', $enclosure = '"', $escapeChar = '\\', $keySeparator = '.')
-    {
+    public function __construct(
+        string $delimiter = ';',
+        string $enclosure = '"',
+        string $escapeChar = '\\',
+        string $keySeparator = '.'
+    ) {
         $this->csvEncoder = new CsvEncoder($delimiter, $enclosure, $escapeChar, $keySeparator);
     }
 
