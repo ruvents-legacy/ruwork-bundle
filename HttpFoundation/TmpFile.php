@@ -8,10 +8,6 @@ class TmpFile extends File
 {
     public function __construct(string $contents)
     {
-        if (is_resource($contents)) {
-            $contents = stream_get_contents($contents, -1, 0);
-        }
-
         $pathname = rtrim(sys_get_temp_dir(), '/\\').DIRECTORY_SEPARATOR.uniqid();
         file_put_contents($pathname, $contents);
 
