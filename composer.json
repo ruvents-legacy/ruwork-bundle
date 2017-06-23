@@ -20,7 +20,7 @@
         "symfony/yaml": "^3.3",
         "symfony/twig-bundle": "^3.3",
         "symfony/security": "^3.3",
-        "swiftmailer/swiftmailer": "^6.0",
+        "symfony/swiftmailer-bundle": "^3.0.3",
         "doctrine/inflector": "^1.1",
         "doctrine/orm": "^2.5",
         "ruvents/doctrine-bundle": "~0.2.1",
