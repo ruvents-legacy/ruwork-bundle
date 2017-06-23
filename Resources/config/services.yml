@@ -35,3 +35,5 @@ services:
       - "@doctrine"
     tags:
       - { name: validator.constraint_validator }
+
+  Ruwork\CoreBundle\Doctrine\RuworkNamingStrategy: ~

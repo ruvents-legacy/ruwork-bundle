@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Doctrine\ORM;
+namespace Ruwork\CoreBundle\Doctrine;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Mapping\NamingStrategy;
@@ -8,33 +8,13 @@ use Doctrine\ORM\Mapping\NamingStrategy;
 class RuworkNamingStrategy implements NamingStrategy
 {
     /**
-     * @var array
-     */
-    private $replacements;
-
-    /**
-     * @param array $replacements
-     */
-    public function __construct(array $replacements = [])
-    {
-        $this->replacements = $replacements;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function classToTableName($className)
     {
-        foreach ($this->replacements as $namespace => $replacement) {
-            if ($namespace === substr($className, 0, $namespaceLength = strlen($namespace))) {
-                $className = $replacement.substr($className, $namespaceLength);
-                $className = Inflector::tableize($className);
+        $className = preg_replace('/(^.*\\\Entity\\\|\\\)/', '', $className);
 
-                return str_replace('\\', '_', $className);
-            }
-        }
-
-        return $this->classToShortTableName($className);
+        return Inflector::tableize($className);
     }
 
     /**
@@ -78,7 +58,7 @@ class RuworkNamingStrategy implements NamingStrategy
      */
     function joinTableName($sourceEntity, $targetEntity, $propertyName = null)
     {
-        return $this->classToShortTableName($sourceEntity).'_link_'.$this->classToShortTableName($targetEntity);
+        return $this->classToTableName($sourceEntity).'_link_'.$this->classToShortTableName($targetEntity);
     }
 
     /**
