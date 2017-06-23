@@ -6,6 +6,9 @@ services:
 
   Ruwork\CoreBundle\Doctrine\RuworkNamingStrategy: ~
 
+  Ruwork\CoreBundle\Mailer\Mailer:
+    public: true
+
   Ruwork\CoreBundle\Monolog\Processor\RequestProcessor:
     tags:
       - { name: monolog.processor, method: processRecord, channel: request }

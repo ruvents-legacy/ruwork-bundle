@@ -4,45 +4,23 @@ namespace Ruwork\CoreBundle\Mailer;
 
 interface MessageBuilderInterface
 {
-    /**
-     * @param ContactableInterface $sender
-     *
-     * @return $this
-     * @throws \RuntimeException
-     */
-    public function setSender(ContactableInterface $sender);
+    public function setFrom(MailUserInterface $from): MessageBuilderInterface;
 
-    /**
-     * @param ContactableInterface $recipient
-     *
-     * @return $this
-     * @throws \RuntimeException
-     */
-    public function setRecipient(ContactableInterface $recipient);
+    public function setSubjects(array $subjects): MessageBuilderInterface;
 
-    /**
-     * @param string $subject
-     * @param array  $parameters
-     *
-     * @return $this
-     * @throws \RuntimeException
-     */
-    public function setSubject($subject, array $parameters = []);
+    public function addSubject(string $subject, string $locale = null): MessageBuilderInterface;
 
-    /**
-     * @param string $template
-     * @param array  $parameters
-     * @param string $contentType
-     * @param int    $priority
-     *
-     * @return $this
-     * @throws \RuntimeException
-     */
-    public function addTemplate($template, array $parameters = [], $contentType = 'text/html', $priority = 0);
+    public function setTemplates(array $templates): MessageBuilderInterface;
 
-    /**
-     * @return \Swift_Message
-     * @throws \RuntimeException
-     */
-    public function getMessage();
+    public function addTemplate(string $template, string $locale = null): MessageBuilderInterface;
+
+    public function setParameters(array $parameters): MessageBuilderInterface;
+
+    public function addParameter(string $name, $value): MessageBuilderInterface;
+
+    public function setContentType(string $contentType): MessageBuilderInterface;
+
+    public function getMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage;
+
+    public function sendTo(MailUserInterface $to): MessageBuilderInterface;
 }

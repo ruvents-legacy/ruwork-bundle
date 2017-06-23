@@ -13,16 +13,25 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('ruwork_core');
 
-        $rootNode
+        /** @noinspection PhpUndefinedMethodInspection */
+        $treeBuilder->root('ruwork_core')
             ->children()
                 ->arrayNode('mailer')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('translation_domain')
-                            ->cannotBeEmpty()
-                            ->defaultNull()
+                        ->arrayNode('from')
+                            ->prototype('array')
+                                ->children()
+                                    ->scalarNode('email')->isRequired()->cannotBeEmpty()->end()
+                                    ->arrayNode('name')
+                                        ->isRequired()
+                                        ->prototype('scalar')->cannotBeEmpty()->end()
+                                        ->beforeNormalization()->castToArray()->end()
+                                    ->end()
+                                    ->scalarNode('locale')->isRequired()->cannotBeEmpty()->end()
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end()

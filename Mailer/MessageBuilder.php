@@ -2,75 +2,57 @@
 
 namespace Ruwork\CoreBundle\Mailer;
 
-use Symfony\Component\Translation\TranslatorInterface;
+use Twig\Environment;
 
 class MessageBuilder implements MessageBuilderInterface
 {
     /**
-     * @var \Twig_Environment
+     * @var \Swift_Mailer
+     */
+    private $swift;
+
+    /**
+     * @var Environment
      */
     private $twig;
 
     /**
-     * @var TranslatorInterface
+     * @var MailUserInterface
      */
-    private $translator;
+    private $from;
+
+    /**
+     * @var string[]
+     */
+    private $subjects = [];
+
+    /**
+     * @var string[]
+     */
+    private $templates = [];
+
+    /**
+     * @var array
+     */
+    private $parameters = [];
 
     /**
      * @var string
      */
-    private $translationDomain;
+    private $contentType = 'text/html';
 
-    /**
-     * @var ContactableInterface
-     */
-    private $sender;
-
-    /**
-     * @var ContactableInterface
-     */
-    private $recipient;
-
-    /**
-     * @var array
-     */
-    private $subject;
-
-    /**
-     * @var array
-     */
-    private $templates;
-
-    /**
-     * @var bool
-     */
-    private $locked = false;
-
-    /**
-     * @param \Twig_Environment        $twig
-     * @param null|TranslatorInterface $translator
-     * @param null|string              $translationDomain
-     */
-    public function __construct(
-        \Twig_Environment $twig,
-        TranslatorInterface $translator = null,
-        $translationDomain = null
-    ) {
+    public function __construct(\Swift_Mailer $swift, Environment $twig)
+    {
+        $this->swift = $swift;
         $this->twig = $twig;
-        $this->translator = $translator;
-        $this->translationDomain = $translationDomain;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setSender(ContactableInterface $sender)
+    public function setFrom(MailUserInterface $from): MessageBuilderInterface
     {
-        if ($this->locked) {
-            throw new \RuntimeException('The builder is locked.');
-        }
-
-        $this->sender = $sender;
+        $this->from = $from;
 
         return $this;
     }
@@ -78,13 +60,9 @@ class MessageBuilder implements MessageBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function setRecipient(ContactableInterface $recipient)
+    public function setSubjects(array $subjects): MessageBuilderInterface
     {
-        if ($this->locked) {
-            throw new \RuntimeException('The builder is locked.');
-        }
-
-        $this->recipient = $recipient;
+        $this->subjects = $subjects;
 
         return $this;
     }
@@ -92,13 +70,13 @@ class MessageBuilder implements MessageBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function setSubject($subject, array $parameters = [])
+    public function addSubject(string $subject, string $locale = null): MessageBuilderInterface
     {
-        if ($this->locked) {
-            throw new \RuntimeException('The builder is locked.');
+        if (null === $locale) {
+            array_unshift($this->subjects, $subject);
+        } else {
+            $this->subjects[$locale] = $subject;
         }
-
-        $this->subject = [$subject, $parameters];
 
         return $this;
     }
@@ -106,13 +84,9 @@ class MessageBuilder implements MessageBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function addTemplate($template, array $parameters = [], $contentType = 'text/html', $priority = 0)
+    public function setTemplates(array $templates): MessageBuilderInterface
     {
-        if ($this->locked) {
-            throw new \RuntimeException('The builder is locked.');
-        }
-
-        $this->templates[$priority][] = [$template, $parameters, $contentType];
+        $this->templates = $templates;
 
         return $this;
     }
@@ -120,74 +94,79 @@ class MessageBuilder implements MessageBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getMessage()
+    public function addTemplate(string $template, string $locale = null): MessageBuilderInterface
     {
-        if ($this->locked) {
-            throw new \RuntimeException('The builder is locked.');
+        if (null === $locale) {
+            array_unshift($this->templates, $template);
+        } else {
+            $this->templates[$locale] = $template;
         }
 
-        $this->locked = true;
-
-        $message = new \Swift_Message();
-
-        if ($this->sender) {
-            $message->addFrom($this->sender->getContactableAddress(), $this->sender->getContactableName());
-        }
-
-        if ($this->recipient) {
-            $message->addTo($this->recipient->getContactableAddress(), $this->recipient->getContactableName());
-        }
-
-        if ($this->subject) {
-            if ($this->recipient && $this->translator && false !== $this->translationDomain) {
-                $subject = $this->translator->trans(
-                    $this->subject[0],
-                    $this->subject[1],
-                    $this->translationDomain,
-                    $this->recipient->getContactableLocale()
-                );
-            } else {
-                $subject = $this->subject[0];
-            }
-
-            $message->setSubject($subject);
-        }
-
-        if ($this->templates) {
-            $templates = $this->templates;
-            krsort($templates);
-
-            foreach ($templates as $templatesPriorityGroup) {
-                foreach ($templatesPriorityGroup as $template) {
-                    try {
-                        $body = $this->twig->render(
-                            $this->getTemplateName($template[0]),
-                            array_replace(['_recipient' => $this->recipient], $template[1])
-                        );
-
-                        $message->setBody($body, $template[2]);
-
-                        break(2);
-                    } catch (\Twig_Error_Loader $exception) {
-                    }
-                }
-            }
-        }
-
-        return $message;
+        return $this;
     }
 
     /**
-     * @param string $name
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getTemplateName($name)
+    public function setParameters(array $parameters): MessageBuilderInterface
     {
-        if ($this->recipient) {
-            $name = str_replace('%locale%', $this->recipient->getContactableLocale(), $name);
-        }
+        $this->parameters = $parameters;
 
-        return $name;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addParameter(string $name, $value): MessageBuilderInterface
+    {
+        $this->parameters[$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContentType(string $contentType): MessageBuilderInterface
+    {
+        $this->contentType = $contentType;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage
+    {
+        $locale = $to->getMailLocale();
+
+        $from = $this->from;
+        $subject = isset($this->subjects[$locale]) ? $this->subjects[$locale] : reset($this->subjects);
+        $template = isset($this->templates[$locale]) ? $this->templates[$locale] : reset($this->templates);
+        $parameters = array_replace($this->parameters, [
+            '_from' => $from,
+            '_to' => $to,
+            '_subject' => $subject,
+        ]);
+
+        return (new \Swift_Message())
+            ->addFrom($from->getEmail(), $from->getMailName($locale))
+            ->addTo($to->getEmail(), $to->getMailName($locale))
+            ->setSubject($subject)
+            ->setBody($this->twig->render($template, $parameters))
+            ->setContentType($this->contentType);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sendTo(MailUserInterface $to): MessageBuilderInterface
+    {
+        $message = $this->getMessage($to);
+        $this->swift->send($message);
+
+        return $this;
     }
 }

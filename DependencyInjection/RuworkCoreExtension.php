@@ -2,6 +2,7 @@
 
 namespace Ruwork\CoreBundle\DependencyInjection;
 
+use Ruwork\CoreBundle\Mailer\Mailer;
 use Ruwork\CoreBundle\Security\AuthenticationHelper;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,6 +19,8 @@ class RuworkCoreExtension extends ConfigurableExtension
     {
         (new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config')))
             ->load('services.yml');
+
+        $container->findDefinition(Mailer::class)->setArgument(3, $mergedConfig['mailer']['from']);
 
         if (null !== $drms = $mergedConfig['security']['default_remember_me_services']) {
             $container->findDefinition(AuthenticationHelper::class)->setArgument(4, new Reference($drms));
