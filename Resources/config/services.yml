@@ -20,6 +20,12 @@ services:
 
   Ruwork\CoreBundle\Validator\Constraints\AliasValidator: ~
 
+  # Twig Extensions
+  Twig\Extensions\ArrayExtension: ~
+  Twig\Extensions\DateExtension: ~
+  Twig\Extensions\IntlExtension: ~
+  Twig\Extensions\TextExtension: ~
+
   # Ruvents Twig Extensions
   Ruvents\TwigExtensions\ClassExtension: ~
   Ruvents\TwigExtensions\SortByExtension: ~
