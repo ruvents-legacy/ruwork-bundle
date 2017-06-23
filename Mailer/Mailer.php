@@ -2,7 +2,6 @@
 
 namespace Ruwork\CoreBundle\Mailer;
 
-use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class Mailer
@@ -18,62 +17,29 @@ class Mailer
     private $swift;
 
     /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
      * @var MailUserInterface[]
      */
-    private $from;
+    private $fromUsers;
 
-    public function __construct(
-        Environment $twig,
-        \Swift_Mailer $swift,
-        TranslatorInterface $translator,
-        array $from = []
-    ) {
+    public function __construct(Environment $twig, \Swift_Mailer $swift, array $from = [])
+    {
         $this->twig = $twig;
         $this->swift = $swift;
-        $this->translator = $translator;
-        $this->from = array_map(function (array $config) {
+        $this->fromUsers = array_map(function (array $config) {
             return new MailUser($config['email'], $config['name'], $config['locale']);
         }, $from);
     }
 
-    /**
-     * @param string|MailUserInterface|null $from
-     */
-    public function buildMessage(
-        $from = null,
-        string $subject = null,
-        string $template = null,
-        array $parameters = []
-    ): MessageBuilderInterface {
+    public function buildMessage(string $from = null): MessageBuilderInterface
+    {
         $builder = new MessageBuilder($this->swift, $this->twig);
 
         if (null !== $from) {
-            if (is_string($from)) {
-                if (!isset($this->from[$from])) {
-                    throw new \OutOfBoundsException(sprintf('Sender "%s" is not registered.', $from));
-                }
-
-                $from = $this->from[$from];
+            if (!isset($this->fromUsers[$from])) {
+                throw new \OutOfBoundsException(sprintf('Sender "%s" is not registered.', $from));
             }
 
-            $builder->setFrom($from);
-        }
-
-        if (null !== $subject) {
-            $builder->addSubject($subject);
-        }
-
-        if (null !== $template) {
-            $builder->addTemplate($template);
-        }
-
-        if (null !== $parameters) {
-            $builder->setParameters($parameters);
+            $builder->setFrom($this->fromUsers[$from]);
         }
 
         return $builder;
