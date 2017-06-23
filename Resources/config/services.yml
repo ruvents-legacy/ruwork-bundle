@@ -28,3 +28,4 @@ services:
   Ruvents\TwigExtensions\StringExtension: ~
   Ruvents\TwigExtensions\FileExtension: ~
   Ruvents\TwigExtensions\MarkdownExtension: ~
+  Ruvents\TwigExtensions\IntlDateExtension: ~
