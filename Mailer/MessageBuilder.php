@@ -2,6 +2,7 @@
 
 namespace Ruwork\CoreBundle\Mailer;
 
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 use Twig\Environment;
 
 class MessageBuilder implements MessageBuilderInterface
@@ -40,6 +41,11 @@ class MessageBuilder implements MessageBuilderInterface
      * @var string
      */
     private $contentType = 'text/html';
+
+    /**
+     * @var \Swift_Attachment[]
+     */
+    private $attachments;
 
     public function __construct(Mailer $mailer, Environment $twig)
     {
@@ -143,31 +149,60 @@ class MessageBuilder implements MessageBuilderInterface
         return $this;
     }
 
+    public function addAttachment(string $pathname, $filename = null): MessageBuilderInterface
+    {
+        $attachment = \Swift_Attachment::fromPath($pathname, MimeTypeGuesser::getInstance()->guess($pathname));
+
+        if (null !== $filename) {
+            $attachment->setFilename($filename);
+        }
+
+        $this->attachments[] = $attachment;
+
+        return $this;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage
     {
+        if (null === $this->from) {
+            throw new \RuntimeException('Sender (from) is not defined.');
+        }
+
+        if ([] === $this->templates) {
+            throw new \RuntimeException('Template is not defined.');
+        }
+
         $locale = $to->getMailLocale();
 
-        $from = $this->from;
         $subject = isset($this->subjects[$locale]) ? $this->subjects[$locale] : reset($this->subjects);
         $template = isset($this->templates[$locale]) ? $this->templates[$locale] : reset($this->templates);
         $parameters = array_replace($this->parameters, [
             '_mail' => [
-                'from' => $from,
+                'from' => $this->from,
                 'to' => $to,
                 'subject' => $subject,
                 'locale' => $locale,
             ],
         ]);
 
-        return (new \Swift_Message())
-            ->addFrom($from->getEmail(), $from->getMailName($locale))
+        $message = (new \Swift_Message())
+            ->addFrom($this->from->getEmail(), $this->from->getMailName($locale))
             ->addTo($to->getEmail(), $to->getMailName($locale))
-            ->setSubject($subject)
             ->setBody($this->twig->render($template, $parameters))
             ->setContentType($this->contentType);
+
+        if (false !== $subject) {
+            $message->setSubject($subject);
+        }
+
+        foreach ($this->attachments as $attachment) {
+            $message->attach($attachment);
+        }
+
+        return $message;
     }
 
     /**

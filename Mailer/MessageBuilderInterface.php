@@ -23,6 +23,8 @@ interface MessageBuilderInterface
 
     public function setContentType(string $contentType): MessageBuilderInterface;
 
+    public function addAttachment(string $pathname, $filename = null): MessageBuilderInterface;
+
     public function getMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage;
 
     public function sendTo(MailUserInterface $to): MessageBuilderInterface;
