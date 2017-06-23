@@ -19,3 +19,12 @@ services:
   Ruwork\CoreBundle\Serializer\Encoder\ExcelCsvEncoder: ~
 
   Ruwork\CoreBundle\Validator\Constraints\AliasValidator: ~
+
+  # Ruvents Twig Extensions
+  Ruvents\TwigExtensions\ClassExtension: ~
+  Ruvents\TwigExtensions\SortByExtension: ~
+  Ruvents\TwigExtensions\SortExtension: ~
+  Ruvents\TwigExtensions\InflectorExtension: ~
+  Ruvents\TwigExtensions\StringExtension: ~
+  Ruvents\TwigExtensions\FileExtension: ~
+  Ruvents\TwigExtensions\MarkdownExtension: ~

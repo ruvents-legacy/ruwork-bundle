@@ -17,8 +17,8 @@ class RuworkCoreExtension extends ConfigurableExtension
      */
     public function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
-        (new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config')))
-            ->load('services.yml');
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
 
         $container->findDefinition(Mailer::class)->setArgument(2, $mergedConfig['mailer']['from']);
 
