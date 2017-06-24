@@ -2,7 +2,6 @@
 
 namespace Ruwork\CoreBundle\Mailer;
 
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 use Twig\Environment;
 
 class MessageBuilder implements MessageBuilderInterface
@@ -43,9 +42,9 @@ class MessageBuilder implements MessageBuilderInterface
     private $contentType = 'text/html';
 
     /**
-     * @var \Swift_Attachment[]
+     * @var \Swift_Mime_SimpleMimeEntity[]
      */
-    private $attachments;
+    private $attachments = [];
 
     public function __construct(Mailer $mailer, Environment $twig)
     {
@@ -149,14 +148,21 @@ class MessageBuilder implements MessageBuilderInterface
         return $this;
     }
 
-    public function addAttachment(string $pathname, $filename = null): MessageBuilderInterface
+    /**
+     * {@inheritdoc}
+     */
+    public function setAttachments(array $attachments): MessageBuilderInterface
     {
-        $attachment = \Swift_Attachment::fromPath($pathname, MimeTypeGuesser::getInstance()->guess($pathname));
+        $this->attachments = $attachments;
 
-        if (null !== $filename) {
-            $attachment->setFilename($filename);
-        }
+        return $this;
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function addAttachment(\Swift_Mime_SimpleMimeEntity $attachment): MessageBuilderInterface
+    {
         $this->attachments[] = $attachment;
 
         return $this;
