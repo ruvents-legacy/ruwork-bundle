@@ -47,15 +47,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->arrayNode('security')
-                    ->addDefaultsIfNotSet()
-                        ->children()
-                        ->scalarNode('default_remember_me_services')
-                            ->cannotBeEmpty()
-                            ->defaultNull()
-                        ->end()
-                    ->end()
-                ->end()
             ->end();
 
         return $treeBuilder;
