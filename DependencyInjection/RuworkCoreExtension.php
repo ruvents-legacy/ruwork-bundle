@@ -2,6 +2,7 @@
 
 namespace Ruwork\CoreBundle\DependencyInjection;
 
+use Ruwork\CoreBundle\EventListener\I18nControllerTemplateListener;
 use Ruwork\CoreBundle\Mailer\Mailer;
 use Ruwork\CoreBundle\Security\AuthenticationHelper;
 use Symfony\Component\Config\FileLocator;
@@ -24,6 +25,16 @@ class RuworkCoreExtension extends ConfigurableExtension
 
         if (null !== $drms = $mergedConfig['security']['default_remember_me_services']) {
             $container->findDefinition(AuthenticationHelper::class)->setArgument(4, new Reference($drms));
+        }
+
+        if ($mergedConfig['i18n']['enabled']) {
+            if ($mergedConfig['i18n']['suffix_controller_templates']) {
+                $container->autowire(I18nControllerTemplateListener::class)
+                    ->setAutoconfigured(true)
+                    ->setPublic(false)
+                    ->setArgument('$locales', $mergedConfig['i18n']['locales'])
+                    ->setArgument('$defaultLocale', $mergedConfig['i18n']['default_locale']);
+            }
         }
     }
 }
