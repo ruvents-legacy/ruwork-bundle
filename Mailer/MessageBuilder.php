@@ -180,7 +180,7 @@ class MessageBuilder implements MessageBuilderInterface
         $subject = isset($this->subjects[$locale]) ? $this->subjects[$locale] : reset($this->subjects);
         $template = isset($this->templates[$locale]) ? $this->templates[$locale] : reset($this->templates);
         $parameters = array_replace($this->parameters, [
-            '_mail' => [
+            '_message' => [
                 'from' => $this->from,
                 'to' => $to,
                 'subject' => $subject,
