@@ -171,7 +171,7 @@ class MessageBuilder implements MessageBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage
+    public function buildMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage
     {
         if (null === $this->from) {
             throw new \RuntimeException('Sender (from) is not defined.');
@@ -216,7 +216,7 @@ class MessageBuilder implements MessageBuilderInterface
      */
     public function sendTo(MailUserInterface $to): MessageBuilderInterface
     {
-        $message = $this->getMessage($to);
+        $message = $this->buildMessage($to);
         $this->mailer->send($message);
 
         return $this;

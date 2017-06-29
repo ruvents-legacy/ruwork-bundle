@@ -30,7 +30,7 @@ interface MessageBuilderInterface
 
     public function addAttachment(\Swift_Mime_SimpleMimeEntity $attachment): MessageBuilderInterface;
 
-    public function getMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage;
+    public function buildMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage;
 
     public function sendTo(MailUserInterface $to): MessageBuilderInterface;
 }
