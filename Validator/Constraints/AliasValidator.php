@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class AliasValidator extends ConstraintValidator
@@ -50,7 +51,13 @@ class AliasValidator extends ConstraintValidator
                 'pattern' => $constraint->pattern,
             ]),
         ]);
-        $this->context->getViolations()->addAll($violationsList);
+
+        foreach ($violationsList as $violation) {
+            /** @var $violation ConstraintViolationInterface */
+            $this->context->buildViolation($violation->getMessage())
+                ->setCode($violation->getCode())
+                ->addViolation();
+        }
 
         $object = $this->context->getObject();
 
