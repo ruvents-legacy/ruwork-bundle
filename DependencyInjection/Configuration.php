@@ -17,6 +17,12 @@ class Configuration implements ConfigurationInterface
         /** @noinspection PhpUndefinedMethodInspection */
         $treeBuilder->root('ruwork_core')
             ->children()
+                ->arrayNode('assets')
+                    ->canBeEnabled()
+                    ->children()
+                        ->scalarNode('web_dir')->isRequired()->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
                 ->arrayNode('i18n')
                     ->canBeEnabled()
                     ->children()
