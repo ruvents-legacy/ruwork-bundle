@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
 
         /** @noinspection PhpUndefinedMethodInspection */
-        $treeBuilder->root('ruwork_core')
+        $treeBuilder->root('ruvents_ruwork')
             ->children()
                 ->arrayNode('assets')
                     ->canBeEnabled()
