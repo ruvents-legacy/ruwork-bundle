@@ -5,7 +5,7 @@ namespace Ruwork\CoreBundle\ExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class RedirectExpressionLanguage extends ExpressionLanguage
+class UrlExpressionLanguage extends ExpressionLanguage
 {
     protected function registerFunctions()
     {

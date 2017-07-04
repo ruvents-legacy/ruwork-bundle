@@ -6,6 +6,12 @@ services:
 
   Ruwork\CoreBundle\Doctrine\NamingStrategy\RuworkNamingStrategy: ~
 
+  Ruwork\CoreBundle\EventListener\RedirectControllerListener:
+    arguments:
+      $controllerResolver: "@controller_resolver"
+
+  Ruwork\CoreBundle\ExpressionLanguage\UrlExpressionLanguage: ~
+
   Ruwork\CoreBundle\Mailer\Mailer:
     public: true
 

@@ -3,13 +3,15 @@
 namespace Ruwork\CoreBundle\EventListener;
 
 use Ruwork\CoreBundle\ControllerAnnotations\Redirect;
-use Ruwork\CoreBundle\ExpressionLanguage\RedirectExpressionLanguage;
+use Ruwork\CoreBundle\ExpressionLanguage\UrlExpressionLanguage;
 use Sensio\Bundle\FrameworkExtraBundle\Security\ExpressionLanguage as SecurityExpressionLanguage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class RedirectControllerListener implements EventSubscriberInterface
@@ -22,17 +24,22 @@ class RedirectControllerListener implements EventSubscriberInterface
     /**
      * @var SecurityExpressionLanguage
      */
-    private $securityLanguage;
+    private $conditionLanguage;
 
     /**
-     * @var RedirectExpressionLanguage
+     * @var UrlExpressionLanguage
      */
-    private $redirectLanguage;
+    private $urlLanguage;
 
     /**
      * @var AuthorizationCheckerInterface
      */
     private $authChecker;
+
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
 
     /**
      * @var UrlGeneratorInterface
@@ -41,15 +48,17 @@ class RedirectControllerListener implements EventSubscriberInterface
 
     public function __construct(
         ControllerResolverInterface $controllerResolver,
-        SecurityExpressionLanguage $securityLanguage,
-        RedirectExpressionLanguage $redirectLanguage,
+        SecurityExpressionLanguage $conditionLanguage,
+        UrlExpressionLanguage $urlLanguage,
         AuthorizationCheckerInterface $authChecker = null,
+        TokenStorageInterface $tokenStorage,
         UrlGeneratorInterface $urlGenerator
     ) {
         $this->controllerResolver = $controllerResolver;
-        $this->securityLanguage = $securityLanguage;
-        $this->redirectLanguage = $redirectLanguage;
+        $this->conditionLanguage = $conditionLanguage;
+        $this->urlLanguage = $urlLanguage;
         $this->authChecker = $authChecker;
+        $this->tokenStorage = $tokenStorage;
         $this->urlGenerator = $urlGenerator;
     }
 
@@ -71,14 +80,15 @@ class RedirectControllerListener implements EventSubscriberInterface
 
         $request = $event->getRequest();
 
-        /** @var Redirect[] $redirects */
         $redirects = $request->attributes->get('_ruwork.redirect', []);
 
         foreach ($redirects as $redirect) {
-            $condition = $this->securityLanguage->evaluate($redirect->getCondition(), [
-                'request' => $request,
-                'auth_checker' => $this->authChecker,
-            ]);
+            if (!$redirect instanceof Redirect) {
+                continue;
+            }
+
+            $condition = $this->conditionLanguage
+                ->evaluate($redirect->getCondition(), $this->getConditionVars($request));
 
             if (!$condition) {
                 continue;
@@ -88,10 +98,12 @@ class RedirectControllerListener implements EventSubscriberInterface
 
             $controller = $this->controllerResolver->getController($request);
 
-            $url = $this->redirectLanguage->evaluate($redirect->getUrl(), [
-                'request' => $request,
-                'url_generator' => $this->urlGenerator,
-            ]);
+            if (false === $controller) {
+                return;
+            }
+
+            $url = $this->urlLanguage
+                ->evaluate($redirect->getUrl(), $this->getUrlVars($request));
 
             $request->attributes->set('permanent', $redirect->getPermanent());
             $request->attributes->set('path', $url);
@@ -100,5 +112,29 @@ class RedirectControllerListener implements EventSubscriberInterface
 
             return;
         }
+    }
+
+    private function getConditionVars(Request $request): array
+    {
+        return array_merge(
+            $request->attributes->all(),
+            [
+                'request' => $request,
+                'user' => $this->tokenStorage->getToken()->getUser(),
+                'object' => $request,
+                'auth_checker' => $this->authChecker,
+            ]
+        );
+    }
+
+    private function getUrlVars(Request $request): array
+    {
+        return array_merge(
+            $request->attributes->all(),
+            [
+                'request' => $request,
+                'url_generator' => $this->urlGenerator,
+            ]
+        );
     }
 }
