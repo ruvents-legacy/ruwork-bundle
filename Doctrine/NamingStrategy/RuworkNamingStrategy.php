@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Doctrine\NamingStrategy;
+namespace Ruvents\RuworkBundle\Doctrine\NamingStrategy;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Mapping\NamingStrategy;

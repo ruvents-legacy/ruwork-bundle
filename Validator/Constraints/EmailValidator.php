@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Validator\Constraints;
+namespace Ruvents\RuworkBundle\Validator\Constraints;
 
 use Egulias\EmailValidator\EmailValidator as EguliasEmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;

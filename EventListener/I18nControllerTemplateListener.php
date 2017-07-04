@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\EventListener;
+namespace Ruvents\RuworkBundle\EventListener;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

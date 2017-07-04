@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Monolog\Processor;
+namespace Ruvents\RuworkBundle\Monolog\Processor;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 

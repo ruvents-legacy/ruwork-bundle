@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\ExpressionLanguage;
+namespace Ruvents\RuworkBundle\ExpressionLanguage;
 
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

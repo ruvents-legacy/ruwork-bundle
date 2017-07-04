@@ -1,8 +1,8 @@
 <?php
 
-namespace Ruwork\CoreBundle\Tests\Validator\Constraints;
+namespace Ruvents\RuworkBundle\Tests\Validator\Constraints;
 
-use Ruwork\CoreBundle\Validator\Constraints\Alias;
+use Ruvents\RuworkBundle\Validator\Constraints\Alias;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\RegexValidator;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;

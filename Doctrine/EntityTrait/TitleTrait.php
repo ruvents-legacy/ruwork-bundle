@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Doctrine\EntityTrait;
+namespace Ruvents\RuworkBundle\Doctrine\EntityTrait;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;

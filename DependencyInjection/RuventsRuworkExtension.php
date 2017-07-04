@@ -1,16 +1,16 @@
 <?php
 
-namespace Ruwork\CoreBundle\DependencyInjection;
+namespace Ruvents\RuworkBundle\DependencyInjection;
 
-use Ruwork\CoreBundle\Asset\VersionStrategy\FilemtimeStrategy;
-use Ruwork\CoreBundle\EventListener\I18nControllerTemplateListener;
-use Ruwork\CoreBundle\Mailer\Mailer;
+use Ruvents\RuworkBundle\Asset\VersionStrategy\FilemtimeStrategy;
+use Ruvents\RuworkBundle\EventListener\I18nControllerTemplateListener;
+use Ruvents\RuworkBundle\Mailer\Mailer;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
-class RuworkCoreExtension extends ConfigurableExtension
+class RuventsRuworkExtension extends ConfigurableExtension
 {
     /**
      * {@inheritdoc}

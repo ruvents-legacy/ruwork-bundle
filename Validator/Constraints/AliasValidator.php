@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Validator\Constraints;
+namespace Ruvents\RuworkBundle\Validator\Constraints;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;

@@ -4,22 +4,22 @@ services:
     autoconfigure: true
     public: false
 
-  Ruwork\CoreBundle\Doctrine\NamingStrategy\RuworkNamingStrategy: ~
+  Ruvents\RuworkBundle\Doctrine\NamingStrategy\RuworkNamingStrategy: ~
 
-  Ruwork\CoreBundle\EventListener\RedirectControllerListener: ~
+  Ruvents\RuworkBundle\EventListener\RedirectControllerListener: ~
 
-  Ruwork\CoreBundle\ExpressionLanguage\UrlExpressionLanguage: ~
+  Ruvents\RuworkBundle\ExpressionLanguage\UrlExpressionLanguage: ~
 
-  Ruwork\CoreBundle\Mailer\Mailer:
+  Ruvents\RuworkBundle\Mailer\Mailer:
     public: true
 
-  Ruwork\CoreBundle\Monolog\Processor\RequestProcessor:
+  Ruvents\RuworkBundle\Monolog\Processor\RequestProcessor:
     tags:
       - { name: monolog.processor, method: processRecord, channel: request }
 
-  Ruwork\CoreBundle\Security\AuthenticationHelper:
+  Ruvents\RuworkBundle\Security\AuthenticationHelper:
     public: true
 
-  Ruwork\CoreBundle\Serializer\Encoder\ExcelCsvEncoder: ~
+  Ruvents\RuworkBundle\Serializer\Encoder\ExcelCsvEncoder: ~
 
-  Ruwork\CoreBundle\Validator\Constraints\AliasValidator: ~
+  Ruvents\RuworkBundle\Validator\Constraints\AliasValidator: ~

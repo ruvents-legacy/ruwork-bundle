@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Validator\Constraints;
+namespace Ruvents\RuworkBundle\Validator\Constraints;
 
 use Egulias\EmailValidator\Exception;
 use Symfony\Component\Validator\Constraint;

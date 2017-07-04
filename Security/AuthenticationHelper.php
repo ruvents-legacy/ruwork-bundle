@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Security;
+namespace Ruvents\RuworkBundle\Security;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;

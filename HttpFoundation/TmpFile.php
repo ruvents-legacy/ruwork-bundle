@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\HttpFoundation;
+namespace Ruvents\RuworkBundle\HttpFoundation;
 
 use Symfony\Component\HttpFoundation\File\File;
 

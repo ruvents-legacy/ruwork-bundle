@@ -1,9 +1,9 @@
 <?php
 
-namespace Ruwork\CoreBundle\EventListener;
+namespace Ruvents\RuworkBundle\EventListener;
 
-use Ruwork\CoreBundle\ControllerAnnotations\Redirect;
-use Ruwork\CoreBundle\ExpressionLanguage\UrlExpressionLanguage;
+use Ruvents\RuworkBundle\ControllerAnnotations\Redirect;
+use Ruvents\RuworkBundle\ExpressionLanguage\UrlExpressionLanguage;
 use Sensio\Bundle\FrameworkExtraBundle\Security\ExpressionLanguage as SecurityExpressionLanguage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

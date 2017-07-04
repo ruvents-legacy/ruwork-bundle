@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Asset\VersionStrategy;
+namespace Ruvents\RuworkBundle\Asset\VersionStrategy;
 
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 

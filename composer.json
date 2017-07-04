@@ -1,6 +1,6 @@
 {
-    "name": "ruwork/core-bundle",
-    "description": "RUWORK Core Bundle",
+    "name": "ruvents/ruwork-bundle",
+    "description": "RUVENTS Ruwork Bundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
@@ -36,7 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Ruwork\\CoreBundle\\": ""
+            "Ruvents\\RuworkBundle\\": ""
         },
         "exclude-from-classmap": [
             "/Tests/"
@@ -44,7 +44,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2-dev"
+            "dev-master": "0.3-dev"
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruwork\CoreBundle\Serializer\Encoder;
+namespace Ruvents\RuworkBundle\Serializer\Encoder;
 
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;

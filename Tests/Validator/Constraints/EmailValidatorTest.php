@@ -1,11 +1,11 @@
 <?php
 
-namespace Ruwork\CoreBundle\Tests\Validator\Constraints;
+namespace Ruvents\RuworkBundle\Tests\Validator\Constraints;
 
 use Egulias\EmailValidator\Exception\AtextAfterCFWS;
 use Egulias\EmailValidator\Exception\NoDomainPart;
-use Ruwork\CoreBundle\Validator\Constraints\Email;
-use Ruwork\CoreBundle\Validator\Constraints\EmailValidator;
+use Ruvents\RuworkBundle\Validator\Constraints\Email;
+use Ruvents\RuworkBundle\Validator\Constraints\EmailValidator;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class EmailValidatorTest extends ConstraintValidatorTestCase
