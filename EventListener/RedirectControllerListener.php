@@ -6,8 +6,8 @@ use Ruwork\CoreBundle\ControllerAnnotations\Redirect;
 use Ruwork\CoreBundle\ExpressionLanguage\UrlExpressionLanguage;
 use Sensio\Bundle\FrameworkExtraBundle\Security\ExpressionLanguage as SecurityExpressionLanguage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -16,11 +16,6 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class RedirectControllerListener implements EventSubscriberInterface
 {
-    /**
-     * @var ControllerResolverInterface
-     */
-    private $controllerResolver;
-
     /**
      * @var SecurityExpressionLanguage
      */
@@ -47,14 +42,12 @@ class RedirectControllerListener implements EventSubscriberInterface
     private $urlGenerator;
 
     public function __construct(
-        ControllerResolverInterface $controllerResolver,
         SecurityExpressionLanguage $conditionLanguage,
         UrlExpressionLanguage $urlLanguage,
         AuthorizationCheckerInterface $authChecker = null,
         TokenStorageInterface $tokenStorage,
         UrlGeneratorInterface $urlGenerator
     ) {
-        $this->controllerResolver = $controllerResolver;
         $this->conditionLanguage = $conditionLanguage;
         $this->urlLanguage = $urlLanguage;
         $this->authChecker = $authChecker;
@@ -94,21 +87,13 @@ class RedirectControllerListener implements EventSubscriberInterface
                 continue;
             }
 
-            $request->attributes->set('_controller', 'FrameworkBundle:Redirect:urlRedirect');
+            $url = $this->urlLanguage->evaluate($redirect->getUrl(), $this->getUrlVars($request));
 
-            $controller = $this->controllerResolver->getController($request);
+            $response = new RedirectResponse($url, $redirect->getPermanent() ? 301 : 302);
 
-            if (false === $controller) {
-                return;
-            }
-
-            $url = $this->urlLanguage
-                ->evaluate($redirect->getUrl(), $this->getUrlVars($request));
-
-            $request->attributes->set('permanent', $redirect->getPermanent());
-            $request->attributes->set('path', $url);
-
-            $event->setController($controller);
+            $event->setController(function () use ($response) {
+                return $response;
+            });
 
             return;
         }
@@ -120,8 +105,8 @@ class RedirectControllerListener implements EventSubscriberInterface
             $request->attributes->all(),
             [
                 'request' => $request,
-                'user' => $this->tokenStorage->getToken()->getUser(),
                 'object' => $request,
+                'user' => $this->tokenStorage->getToken()->getUser(),
                 'auth_checker' => $this->authChecker,
             ]
         );

@@ -6,9 +6,7 @@ services:
 
   Ruwork\CoreBundle\Doctrine\NamingStrategy\RuworkNamingStrategy: ~
 
-  Ruwork\CoreBundle\EventListener\RedirectControllerListener:
-    arguments:
-      $controllerResolver: "@controller_resolver"
+  Ruwork\CoreBundle\EventListener\RedirectControllerListener: ~
 
   Ruwork\CoreBundle\ExpressionLanguage\UrlExpressionLanguage: ~
 
