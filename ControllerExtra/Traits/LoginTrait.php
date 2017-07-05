@@ -29,7 +29,10 @@ trait LoginTrait
         return $this->authenticationUtils->getLastAuthenticationError();
     }
 
-    protected function getLastUsername(): string
+    /**
+     * @return string|null
+     */
+    protected function getLastUsername()
     {
         return $this->authenticationUtils->getLastUsername();
     }
