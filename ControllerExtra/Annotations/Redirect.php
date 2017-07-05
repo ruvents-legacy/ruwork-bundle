@@ -1,6 +1,6 @@
 <?php
 
-namespace Ruvents\RuworkBundle\ControllerAnnotations;
+namespace Ruvents\RuworkBundle\ControllerExtra\Annotations;
 
 use Doctrine\Common\Annotations\Annotation\Required;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationAnnotation;

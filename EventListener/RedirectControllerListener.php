@@ -2,7 +2,7 @@
 
 namespace Ruvents\RuworkBundle\EventListener;
 
-use Ruvents\RuworkBundle\ControllerAnnotations\Redirect;
+use Ruvents\RuworkBundle\ControllerExtra\Annotations\Redirect;
 use Ruvents\RuworkBundle\ExpressionLanguage\UrlExpressionLanguage;
 use Sensio\Bundle\FrameworkExtraBundle\Security\ExpressionLanguage as SecurityExpressionLanguage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
