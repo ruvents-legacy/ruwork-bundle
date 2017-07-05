@@ -1,17 +1,17 @@
 <?php
 
-namespace Ruvents\RuworkBundle\Doctrine\EntityTrait;
+namespace Ruvents\RuworkBundle\Doctrine\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Ruvents\DoctrineBundle\Mapping\Timestamp;
 
-trait UpdatedAtTrait
+trait CreatedAtTrait
 {
     /**
      * @ORM\Column(type="datetime")
-     * @Timestamp(on={"persist", "update"})
+     * @Timestamp(on={"persist"}, onlyIfNull=true)
      *
      * @var \DateTime
      */
-    public $updatedAt;
+    public $createdAt;
 }
