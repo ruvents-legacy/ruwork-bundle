@@ -6,7 +6,8 @@ services:
 
   Ruvents\RuworkBundle\Doctrine\NamingStrategy\RuworkNamingStrategy: ~
 
-  Ruvents\RuworkBundle\EventListener\RedirectControllerListener: ~
+  Ruvents\RuworkBundle\EventListener\RedirectControllerListener:
+    $conditionLanguage: "@sensio_framework_extra.security.expression_language"
 
   Ruvents\RuworkBundle\ExpressionLanguage\UrlExpressionLanguage: ~
 
