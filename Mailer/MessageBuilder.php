@@ -183,8 +183,8 @@ class MessageBuilder implements MessageBuilderInterface
 
         $locale = $to->getMailLocale();
 
-        $subject = isset($this->subjects[$locale]) ? $this->subjects[$locale] : reset($this->subjects);
-        $template = isset($this->templates[$locale]) ? $this->templates[$locale] : reset($this->templates);
+        $subject = $this->subjects[$locale] ?? reset($this->subjects) ?: null;
+        $template = $this->templates[$locale] ?? reset($this->templates);
         $parameters = array_replace($this->parameters, [
             '_message' => [
                 'from' => $this->from,
@@ -200,7 +200,7 @@ class MessageBuilder implements MessageBuilderInterface
             ->setBody($this->twig->render($template, $parameters))
             ->setContentType($this->contentType);
 
-        if (false !== $subject) {
+        if (null !== $subject) {
             $message->setSubject($subject);
         }
 

@@ -20,9 +20,11 @@ class MailUser implements MailUserInterface
     private $locale;
 
     /**
-     * @param string|string[] $name
+     * @param string          $email  Email
+     * @param string|string[] $name   Имя строкой (будет использовано для любой локали) или массивом (ключ - локаль)
+     * @param string          $locale Предпочтительный язык сообщения
      */
-    public function __construct($email, $name, $locale)
+    public function __construct($email, $name, $locale = 'ru')
     {
         $this->email = $email;
         $this->names = (array)$name;
