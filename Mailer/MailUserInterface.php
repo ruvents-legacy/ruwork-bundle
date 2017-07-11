@@ -5,7 +5,7 @@ namespace Ruvents\RuworkBundle\Mailer;
 interface MailUserInterface
 {
     /**
-     * Email, для отправки и для получения
+     * Email для отправки и для получения
      *
      * @return string
      */
