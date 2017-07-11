@@ -19,24 +19,30 @@ class Mailer
     /**
      * @var MailUserInterface[]
      */
-    private $fromUsers;
+    private $users;
 
-    public function __construct(Environment $twig, \Swift_Mailer $swift, array $from = [])
+    public function __construct(Environment $twig, \Swift_Mailer $swift, array $users = [])
     {
         $this->twig = $twig;
         $this->swift = $swift;
-        $this->fromUsers = array_map(function (array $config) {
-            return new MailUser($config['email'], $config['name'], $config['locale']);
-        }, $from);
+        $this->users = array_map(function ($user) {
+            if (is_array($user)) {
+                $user = new MailUser($user['email'], $user['name'], $user['locale']);
+            } elseif (!$user instanceof MailUserInterface) {
+                throw new \InvalidArgumentException('User must be an array or implement MailUserInterface.');
+            }
+
+            return $user;
+        }, $users);
     }
 
-    public function getFrom($name): MailUserInterface
+    public function getUser(string $id): MailUserInterface
     {
-        if (!isset($this->fromUsers[$name])) {
-            throw new \OutOfBoundsException(sprintf('Sender "%s" is not registered.', $name));
+        if (!isset($this->users[$id])) {
+            throw new \OutOfBoundsException(sprintf('User "%s" is not registered.', $id));
         }
 
-        return $this->fromUsers[$name];
+        return $this->users[$id];
     }
 
     public function createMessageBuilder(): MessageBuilderInterface

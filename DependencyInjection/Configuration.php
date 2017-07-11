@@ -38,7 +38,22 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('mailer')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('from')
+                        ->arrayNode('users')
+                            ->useAttributeAsKey('id')
+                            ->normalizeKeys(false)
+                            ->validate()
+                                ->always(function (array $users) {
+                                    foreach ($users as $name => $user) {
+                                        if (!is_string($name)) {
+                                            throw new \InvalidArgumentException(
+                                                sprintf('"%s" is not a valid id. Must be string.', $name)
+                                            );
+                                        }
+                                    }
+
+                                    return $users;
+                                })
+                            ->end()
                             ->prototype('array')
                                 ->children()
                                     ->scalarNode('email')->isRequired()->cannotBeEmpty()->end()

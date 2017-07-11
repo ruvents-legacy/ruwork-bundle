@@ -35,6 +35,6 @@ class RuventsRuworkExtension extends ConfigurableExtension
             }
         }
 
-        $container->findDefinition(Mailer::class)->setArgument(2, $config['mailer']['from']);
+        $container->findDefinition(Mailer::class)->setArgument('$users', $config['mailer']['users']);
     }
 }

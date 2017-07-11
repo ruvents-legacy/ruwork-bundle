@@ -58,10 +58,10 @@ class MessageBuilder implements MessageBuilderInterface
     public function setFrom($from): MessageBuilderInterface
     {
         if (is_string($from)) {
-            $from = $this->mailer->getFrom($from);
+            $from = $this->mailer->getUser($from);
         } elseif (!$from instanceof MailUserInterface) {
             throw new \InvalidArgumentException(
-                sprintf('Argument $from must be a string or an instance of %s', MailUserInterface::class)
+                sprintf('$from must be a string id or an instance of %s.', MailUserInterface::class)
             );
         }
 
@@ -171,7 +171,7 @@ class MessageBuilder implements MessageBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function buildMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage
+    public function buildMessage($to): \Swift_Mime_SimpleMessage
     {
         if (null === $this->from) {
             throw new \RuntimeException('Sender (from) is not defined.');
@@ -179,6 +179,14 @@ class MessageBuilder implements MessageBuilderInterface
 
         if ([] === $this->templates) {
             throw new \RuntimeException('Template is not defined.');
+        }
+
+        if (is_string($to)) {
+            $to = $this->mailer->getUser($to);
+        } elseif (!$to instanceof MailUserInterface) {
+            throw new \InvalidArgumentException(
+                sprintf('$to must be a string id or an instance of %s.', MailUserInterface::class)
+            );
         }
 
         $locale = $to->getMailLocale();
@@ -214,7 +222,7 @@ class MessageBuilder implements MessageBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function sendTo(MailUserInterface $to): MessageBuilderInterface
+    public function sendTo($to): MessageBuilderInterface
     {
         $message = $this->buildMessage($to);
         $this->mailer->send($message);

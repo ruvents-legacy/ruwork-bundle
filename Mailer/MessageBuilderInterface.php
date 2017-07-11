@@ -6,6 +6,8 @@ interface MessageBuilderInterface
 {
     /**
      * @param string|MailUserInterface $from
+     *
+     * @return MessageBuilderInterface
      */
     public function setFrom($from): MessageBuilderInterface;
 
@@ -25,12 +27,24 @@ interface MessageBuilderInterface
 
     /**
      * @param \Swift_Mime_SimpleMimeEntity[] $attachments
+     *
+     * @return MessageBuilderInterface
      */
     public function setAttachments(array $attachments): MessageBuilderInterface;
 
     public function addAttachment(\Swift_Mime_SimpleMimeEntity $attachment): MessageBuilderInterface;
 
-    public function buildMessage(MailUserInterface $to): \Swift_Mime_SimpleMessage;
+    /**
+     * @param string|MailUserInterface $to
+     *
+     * @return \Swift_Mime_SimpleMessage
+     */
+    public function buildMessage($to): \Swift_Mime_SimpleMessage;
 
-    public function sendTo(MailUserInterface $to): MessageBuilderInterface;
+    /**
+     * @param string|MailUserInterface $to
+     *
+     * @return MessageBuilderInterface
+     */
+    public function sendTo($to): MessageBuilderInterface;
 }
