@@ -8,7 +8,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class AliasValidator extends ConstraintValidator
@@ -40,46 +39,37 @@ class AliasValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $violationsList = $this->context->getValidator()->validate($value, [
-            new Length([
-                'max' => $constraint->maxLength,
-                'maxMessage' => $constraint->maxLengthMessage,
-            ]),
-            new Regex([
-                'htmlPattern' => $constraint->htmlPattern,
-                'message' => $constraint->regexMessage,
-                'pattern' => $constraint->pattern,
-            ]),
-        ]);
+        $context = $this->context;
 
-        foreach ($violationsList as $violation) {
-            /** @var $violation ConstraintViolationInterface */
-            $this->context->buildViolation($violation->getMessage())
-                ->setCode($violation->getCode())
-                ->addViolation();
-        }
+        $context->getValidator()
+            ->inContext($context)
+            ->atPath($context->getPropertyPath())
+            ->validate($value, [
+                new Length([
+                    'max' => $constraint->maxLength,
+                    'maxMessage' => $constraint->maxLengthMessage,
+                ]),
+                new Regex([
+                    'htmlPattern' => $constraint->htmlPattern,
+                    'message' => $constraint->regexMessage,
+                    'pattern' => $constraint->pattern,
+                ]),
+            ]);
 
-        $object = $this->context->getObject();
+        $object = $context->getObject();
 
         if (null !== $object && null !== $this->registry->getManagerForClass(get_class($object))) {
-            $violationsList = $this->context
-                ->getValidator()
+            $context->getValidator()
+                ->inContext($context)
+                ->atPath($context->getPropertyPath())
                 ->validate($object, [
                     new UniqueEntity([
                         'entityClass' => $constraint->entityClass,
-                        'fields' => $this->context->getPropertyName(),
+                        'fields' => $context->getPropertyName(),
                         'ignoreNull' => false,
                         'repositoryMethod' => $constraint->repositoryMethod,
                     ]),
                 ]);
-
-            if (0 < count($violationsList)) {
-                $violation = $violationsList->get(0);
-                $this->context->buildViolation($constraint->notUniqueMessage)
-                    ->setParameters($violation->getParameters())
-                    ->setCode($violation->getCode())
-                    ->addViolation();
-            }
         }
     }
 }
