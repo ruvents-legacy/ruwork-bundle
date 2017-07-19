@@ -209,7 +209,7 @@ class MessageBuilder implements MessageBuilderInterface
             ->setContentType($this->contentType);
 
         if (null !== $subject) {
-            $message->setSubject($subject);
+            $message->setSubject(mb_encode_mimeheader($subject));
         }
 
         foreach ($this->attachments as $attachment) {
