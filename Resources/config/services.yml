@@ -4,6 +4,8 @@ services:
     autoconfigure: true
     public: false
 
+  Ruvents\RuworkBundle\Doctrine\AuthorProvider\SecurityTokenAuthorProvider: ~
+
   Ruvents\RuworkBundle\Doctrine\NamingStrategy\RuworkNamingStrategy: ~
 
   Ruvents\RuworkBundle\EventListener\RedirectControllerListener:
