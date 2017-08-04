@@ -26,9 +26,9 @@ class Alias extends Constraint
     public $htmlPattern = self::HTML_MATCH_PATTERN;
 
     /**
-     * @var string
+     * @var int
      */
-    public $maxLength = 30;
+    public $maxLength = 120;
 
     /**
      * @var string|null
