@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 class RemoveTrailingSlashController
 {
     /**
-     * @Route("/{path}", requirements={"path": ".*\/$"}, methods={"GET"})
+     * @Route("/{path}", requirements={"path": ".*\/$"})
      */
     public function __invoke(Request $request): RedirectResponse
     {
@@ -18,6 +18,6 @@ class RemoveTrailingSlashController
 
         $uri = $request->getUriForPath($pathInfo).($query ? '?'.$query : '');
 
-        return new RedirectResponse($uri, 301);
+        return new RedirectResponse($uri, RedirectResponse::HTTP_MOVED_PERMANENTLY);
     }
 }
