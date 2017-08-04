@@ -9,7 +9,7 @@ trait UpdatedAtTrait
 {
     /**
      * @ORM\Column(type="datetime")
-     * @Timestamp(on={"persist", "update"})
+     * @Timestamp(on={Timestamp::ON_PERSIST, Timestamp::ON_UPDATE})
      *
      * @var \DateTime
      */
