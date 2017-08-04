@@ -5,15 +5,15 @@ namespace Ruvents\RuworkBundle\Doctrine\Traits;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-trait OrderTrait
+trait PriorityTrait
 {
     /**
-     * @ORM\Column(type="smallint", name="_order")
+     * @ORM\Column(type="float")
      *
      * @Assert\NotBlank()
-     * @Assert\Type("int")
+     * @Assert\Type("numeric")
      *
-     * @var int
+     * @var int|float
      */
-    public $order = 0;
+    public $priority = 0;
 }
