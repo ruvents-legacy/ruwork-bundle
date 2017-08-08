@@ -13,6 +13,10 @@ services:
 
   Ruvents\RuworkBundle\ExpressionLanguage\UrlExpressionLanguage: ~
 
+  Ruvents\RuworkBundle\Form\TypeExtension\FormTypeNovalidateExtension:
+    tags:
+      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
   Ruvents\RuworkBundle\Mailer\Mailer:
     public: true
 
