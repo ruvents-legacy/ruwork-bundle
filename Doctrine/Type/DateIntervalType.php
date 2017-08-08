@@ -6,6 +6,9 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 
+/**
+ * @deprecated use Ruvents\DoctrineBundle\Doctrine\Type\DateIntervalType
+ */
 class DateIntervalType extends Type
 {
     const NAME = 'dateinterval';
@@ -15,6 +18,8 @@ class DateIntervalType extends Type
      */
     public function getName()
     {
+        @trigger_error(sprintf('Class "%s" is deprecated since 0.5.2 and will be removed in 0.6.0. Use "Ruvents\DoctrineBundle\Doctrine\Type\DateIntervalType".', __CLASS__), E_USER_DEPRECATED);
+
         return self::NAME;
     }
 
