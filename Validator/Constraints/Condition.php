@@ -2,13 +2,13 @@
 
 namespace Ruvents\RuworkBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints\Composite;
 
 /**
  * @Annotation
  * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  */
-class Condition extends Constraint
+class Condition extends Composite
 {
     /**
      * @var string
@@ -19,11 +19,6 @@ class Condition extends Constraint
      * @var array
      */
     public $true = [];
-
-    /**
-     * @var array
-     */
-    public $false = [];
 
     /**
      * {@inheritdoc}
@@ -41,5 +36,13 @@ class Condition extends Constraint
         return [
             'expression',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getCompositeOption()
+    {
+        return 'true';
     }
 }

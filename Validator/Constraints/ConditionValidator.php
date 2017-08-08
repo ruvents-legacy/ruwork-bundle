@@ -30,16 +30,18 @@ class ConditionValidator extends ConstraintValidator
 
         $context = $this->context;
 
-        $true = $this->getExpressionLanguage()
+        $condition = $this->getExpressionLanguage()
             ->evaluate($constraint->expression, [
                 'value' => $value,
                 'this' => $context->getObject(),
             ]);
 
-        $context->getValidator()
-            ->inContext($context)
-            ->atPath($context->getPropertyPath())
-            ->validate($value, $true ? $constraint->true : $constraint->false);
+        if ($condition) {
+            $context->getValidator()
+                ->inContext($context)
+                ->atPath($context->getPropertyPath())
+                ->validate($value, $constraint->true);
+        }
     }
 
     private function getExpressionLanguage()
