@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form\TypeExtension;
+namespace Ruvents\RuworkBundle\Form\TypeExtension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
