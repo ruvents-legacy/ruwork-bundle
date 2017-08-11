@@ -5,6 +5,10 @@ namespace Ruvents\RuworkBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\FileValidator;
 
+/**
+ * @Annotation
+ * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
+ */
 class Document extends File
 {
     /**
