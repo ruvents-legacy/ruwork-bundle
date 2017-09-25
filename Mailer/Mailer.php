@@ -52,6 +52,7 @@ class Mailer
 
     public function send(\Swift_Mime_SimpleMessage $message)
     {
+        $message->setSubject(mb_encode_mimeheader($message->getSubject(), 'utf-8'));
         $this->swift->send($message);
     }
 }
