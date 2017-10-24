@@ -97,6 +97,8 @@ class RedirectControllerListener implements EventSubscriberInterface
                 return $response;
             });
 
+            $event->stopPropagation();
+
             return;
         }
     }
