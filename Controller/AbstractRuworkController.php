@@ -1,12 +1,12 @@
 <?php
 
-namespace Ruvents\RuworkBundle\ControllerExtra;
+namespace Ruvents\RuworkBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-abstract class RuworkController extends AbstractController
+abstract class AbstractRuworkController extends AbstractController
 {
     /**
      * {@inheritdoc}
@@ -14,12 +14,12 @@ abstract class RuworkController extends AbstractController
     public static function getSubscribedServices()
     {
         return array_merge([
-            'event_dispatcher' => EventDispatcherInterface::class,
+            EventDispatcherInterface::class,
         ], parent::getSubscribedServices());
     }
 
-    protected function dispatch(string $eventName, Event $event = null)
+    protected function dispatch(string $eventName, Event $event = null): void
     {
-        $this->container->get('event_dispatcher')->dispatch($eventName, $event);
+        $this->container->get(EventDispatcherInterface::class)->dispatch($eventName, $event);
     }
 }
