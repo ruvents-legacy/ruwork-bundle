@@ -15,8 +15,18 @@ class TmpFile extends File
         parent::__construct($pathname);
     }
 
-    public static function createFromResource(resource $handle): TmpFile
+    public static function createFromResource(resource $handle): self
     {
         return new self(stream_get_contents($handle, -1, 0));
+    }
+
+    public function unlink(): void
+    {
+        @unlink($this->getPathname());
+    }
+
+    public function __destruct()
+    {
+        $this->unlink();
     }
 }
