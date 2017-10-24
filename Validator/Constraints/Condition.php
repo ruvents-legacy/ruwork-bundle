@@ -5,7 +5,7 @@ namespace Ruvents\RuworkBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraints\Composite;
 
 /**
- * @Annotation
+ * @Annotation()
  * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  */
 class Condition extends Composite

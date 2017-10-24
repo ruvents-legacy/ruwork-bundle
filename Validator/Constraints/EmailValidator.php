@@ -23,11 +23,9 @@ class EmailValidator extends ConstraintValidator
             return;
         }
 
-        if (!is_scalar($value) && !(is_object($value) && method_exists($value, '__toString'))) {
+        if (!is_string($value)) {
             throw new UnexpectedTypeException($value, 'string');
         }
-
-        $value = (string)$value;
 
         $validator = new EguliasEmailValidator();
         $rfcValidation = new RFCValidation();
