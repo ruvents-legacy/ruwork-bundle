@@ -59,9 +59,9 @@ class Redirect extends ConfigurationAnnotation
         $this->permanent = $permanent;
     }
 
-    public function setValue(string $expression)
+    public function setValue(string $value)
     {
-        $this->setCondition($expression);
+        $this->setUrl($value);
     }
 
     /**
