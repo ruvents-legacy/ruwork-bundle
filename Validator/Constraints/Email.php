@@ -6,7 +6,7 @@ use Egulias\EmailValidator\Exception;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @Annotation
+ * @Annotation()
  * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  */
 class Email extends Constraint

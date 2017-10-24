@@ -6,7 +6,7 @@ use Doctrine\Common\Annotations\Annotation\Required;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationAnnotation;
 
 /**
- * @Annotation
+ * @Annotation()
  */
 class Redirect extends ConfigurationAnnotation
 {
