@@ -7,6 +7,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UrlExpressionLanguage extends ExpressionLanguage
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function registerFunctions()
     {
         parent::registerFunctions();
