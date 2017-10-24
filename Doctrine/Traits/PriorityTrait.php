@@ -11,9 +11,28 @@ trait PriorityTrait
      * @ORM\Column(type="float")
      *
      * @Assert\NotBlank()
-     * @Assert\Type("numeric")
      *
-     * @var int|float
+     * @var float
      */
-    public $priority = 0;
+    protected $priority = 0;
+
+    /**
+     * @return float
+     */
+    public function getPriority(): float
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param float $priority
+     *
+     * @return $this
+     */
+    public function setPriority(float $priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
 }

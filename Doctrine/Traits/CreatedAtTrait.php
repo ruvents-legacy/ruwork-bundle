@@ -3,15 +3,24 @@
 namespace Ruvents\RuworkBundle\Doctrine\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ruvents\DoctrineBundle\Mapping\Timestamp;
+use Ruvents\DoctrineBundle\Annotations\Mapping\PersistTimestamp;
 
 trait CreatedAtTrait
 {
     /**
-     * @ORM\Column(type="datetime")
-     * @Timestamp(on={Timestamp::ON_PERSIST}, onlyIfNull=true)
+     * @ORM\Column(type="datetimetz_immutable")
      *
-     * @var \DateTime
+     * @PersistTimestamp()
+     *
+     * @var \DateTimeImmutable
      */
-    public $createdAt;
+    protected $createdAt;
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getCreatedAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
 }

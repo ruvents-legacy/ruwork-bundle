@@ -16,5 +16,25 @@ trait AliasTrait
      *
      * @var string
      */
-    public $alias;
+    protected $alias = '';
+
+    /**
+     * @return string
+     */
+    public function getAlias(): string
+    {
+        return $this->alias;
+    }
+
+    /**
+     * @param string $alias
+     *
+     * @return $this
+     */
+    public function setAlias(string $alias)
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
 }

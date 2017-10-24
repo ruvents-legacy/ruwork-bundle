@@ -13,5 +13,13 @@ trait IdTrait
      *
      * @var int
      */
-    public $id;
+    protected $id = 0;
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

@@ -3,25 +3,41 @@
 namespace Ruvents\RuworkBundle\Doctrine\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 trait TitleTrait
 {
     /**
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
+     * @ORM\Column(type="text")
      *
      * @var string
      */
-    public $title;
+    protected $title = '';
 
     /**
      * @return string
      */
-    public function __toString()
+    public function getTitle(): string
     {
-        return (string)$this->title;
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return $this
+     */
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }

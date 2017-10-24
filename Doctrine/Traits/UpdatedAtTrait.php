@@ -3,15 +3,24 @@
 namespace Ruvents\RuworkBundle\Doctrine\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ruvents\DoctrineBundle\Mapping\Timestamp;
+use Ruvents\DoctrineBundle\Annotations\Mapping\UpdateTimestamp;
 
 trait UpdatedAtTrait
 {
     /**
-     * @ORM\Column(type="datetime")
-     * @Timestamp(on={Timestamp::ON_PERSIST, Timestamp::ON_UPDATE})
+     * @ORM\Column(type="datetimetz_immutable")
      *
-     * @var \DateTime
+     * @UpdateTimestamp()
+     *
+     * @var \DateTimeImmutable
      */
-    public $updatedAt;
+    protected $updatedAt;
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
 }
