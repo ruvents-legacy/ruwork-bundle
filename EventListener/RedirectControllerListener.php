@@ -61,12 +61,14 @@ class RedirectControllerListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::CONTROLLER => ['onKernelController', -200],
+            // right after the FrameworkExtraBundle listener prepares the annotations
+            KernelEvents::CONTROLLER => ['onKernelController', -1],
         ];
     }
 
     public function onKernelController(FilterControllerEvent $event)
     {
+        // redirects don't make sense in sub-requests
         if (!$event->isMasterRequest()) {
             return;
         }
