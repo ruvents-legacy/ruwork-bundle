@@ -25,3 +25,10 @@ services:
     Ruvents\RuworkBundle\Serializer\Encoder\ExcelCsvEncoder: ~
 
     Ruvents\RuworkBundle\Validator\Constraints\AliasValidator: ~
+
+    Ruvents\RuworkBundle\Twig\Extension\RoutingExtensionDecorator:
+        decorates: twig.extension.routing
+        decoration_inner_name: twig.extension.routing.decorated
+        arguments:
+            $decorated: '@twig.extension.routing.decorated'
+        autoconfigure: false
