@@ -2,20 +2,13 @@
 
 namespace Ruvents\RuworkBundle\Twig\Extension;
 
-use Symfony\Bridge\Twig\Extension\RoutingExtension;
-use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Bridge\Twig\Extension\RoutingExtension as BaseRoutingExtension;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class RoutingExtensionDecorator extends AbstractExtension
+class RoutingExtension extends BaseRoutingExtension
 {
-    /**
-     * @var RoutingExtension
-     */
-    private $decorated;
-
     /**
      * @var RouterInterface
      */
@@ -26,19 +19,11 @@ class RoutingExtensionDecorator extends AbstractExtension
      */
     private $accessor;
 
-    public function __construct(RoutingExtension $decorated, RouterInterface $router, PropertyAccessorInterface $accessor = null)
+    public function __construct(UrlGeneratorInterface $generator, RouterInterface $router, PropertyAccessorInterface $accessor)
     {
-        $this->decorated = $decorated;
+        parent::__construct($generator);
         $this->router = $router;
-        $this->accessor = $accessor ?? PropertyAccess::createPropertyAccessor();
-    }
-
-    public function getFunctions()
-    {
-        return [
-            new TwigFunction('url', [$this, 'getUrl'], ['is_safe_callback' => [$this->decorated, 'isUrlGenerationSafe']]),
-            new TwigFunction('path', [$this, 'getPath'], ['is_safe_callback' => [$this->decorated, 'isUrlGenerationSafe']]),
-        ];
+        $this->accessor = $accessor;
     }
 
     public function getUrl($name, $parameters = [], $relative = false)
@@ -47,7 +32,7 @@ class RoutingExtensionDecorator extends AbstractExtension
             $parameters = $this->getObjectParameters($name, $parameters);
         }
 
-        return call_user_func([$this->decorated, 'getUrl'], $name, $parameters, $relative);
+        return parent::getUrl($name, $parameters, $relative);
     }
 
     public function getPath($name, $parameters = [], $relative = false)
@@ -56,7 +41,7 @@ class RoutingExtensionDecorator extends AbstractExtension
             $parameters = $this->getObjectParameters($name, $parameters);
         }
 
-        return call_user_func([$this->decorated, 'getPath'], $name, $parameters, $relative);
+        return parent::getPath($name, $parameters, $relative);
     }
 
     private function getObjectParameters($name, $object)
@@ -71,8 +56,6 @@ class RoutingExtensionDecorator extends AbstractExtension
             foreach ($route->compile()->getPathVariables() as $variable) {
                 if ($this->accessor->isReadable($object, $variable)) {
                     $parameters[$variable] = $this->accessor->getValue($object, $variable);
-                } elseif ($route->hasDefault($variable)) {
-                    $parameters[$variable] = $route->getDefault($variable);
                 }
             }
         }
