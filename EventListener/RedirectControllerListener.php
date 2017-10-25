@@ -75,7 +75,7 @@ class RedirectControllerListener implements EventSubscriberInterface
 
         $request = $event->getRequest();
 
-        $redirects = $request->attributes->get('_ruwork.redirect', []);
+        $redirects = $request->attributes->get('_ruvents_ruwork.redirect', []);
 
         foreach ($redirects as $redirect) {
             if (!$redirect instanceof Redirect) {

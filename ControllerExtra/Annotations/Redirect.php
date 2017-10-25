@@ -69,7 +69,7 @@ class Redirect extends ConfigurationAnnotation
      */
     public function getAliasName()
     {
-        return 'ruwork.redirect';
+        return 'ruvents_ruwork.redirect';
     }
 
     /**
