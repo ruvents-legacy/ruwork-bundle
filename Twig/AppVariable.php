@@ -2,10 +2,10 @@
 
 namespace Ruvents\RuworkBundle\Twig;
 
-use Symfony\Bridge\Twig\AppVariable;
+use Symfony\Bridge\Twig\AppVariable as BaseAppVariable;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 
-class ExtendedAppVariable extends AppVariable
+class AppVariable extends BaseAppVariable
 {
     /**
      * @var FirewallMap

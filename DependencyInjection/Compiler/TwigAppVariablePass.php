@@ -2,7 +2,7 @@
 
 namespace Ruvents\RuworkBundle\DependencyInjection\Compiler;
 
-use Ruvents\RuworkBundle\Twig\ExtendedAppVariable;
+use Ruvents\RuworkBundle\Twig\AppVariable;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -21,7 +21,7 @@ class TwigAppVariablePass implements CompilerPassInterface
 
         $container
             ->findDefinition($name)
-            ->setClass(ExtendedAppVariable::class)
+            ->setClass(AppVariable::class)
             ->addMethodCall('setFirewallMap', [
                 new Reference('security.firewall.map', ContainerInterface::IGNORE_ON_INVALID_REFERENCE),
             ]);
