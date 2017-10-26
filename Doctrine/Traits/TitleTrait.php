@@ -3,11 +3,14 @@
 namespace Ruvents\RuworkBundle\Doctrine\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait TitleTrait
 {
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Length(max=255)
      *
      * @var string
      */
