@@ -16,7 +16,7 @@ services:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
     Ruvents\RuworkBundle\Mailer\Mailer:
-        public: true
+        $swift: "@mailer"
 
     Ruvents\RuworkBundle\Monolog\Processor\RequestProcessor:
         tags:
