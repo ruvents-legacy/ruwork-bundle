@@ -32,6 +32,7 @@ title:
     exhibition_space: Выставочное пространство
     faq: FAQ
     feedback: Отзывы
+    first_name: Имя
     foreign_company: Зарубежная компания
     form: Форма
     free_hotline: Бесплатная горячая линия
@@ -52,6 +53,7 @@ title:
     investors: Инвесторы
     job_position: Должность
     jury: Жюри
+    last_name: Фамилия
     logistics: Логистика
     menu: Меню
     message: Сообщение
@@ -77,9 +79,12 @@ title:
     partner: Партнер
     partners: Партнеры
     partners_and_sponsors: Партнеры и спонсоры
+    password: Пароль
     password_recovery: Восстановление пароля
+    patronymic: Отчество
     payment_status: Статус оплаты
     personal_account: Личный кабинет
+    phone: Телефон
     photo: Фото
     press_center: Пресс-центр
     price: Цена
@@ -105,9 +110,9 @@ title:
     strategic_partners: Стратегические партнеры
     subject: Тема
     survey: Опрос
-    phone: Телефон
     terms_of_use_and_privacy_policy: Условия использования и политика конфиденциальности
     time: Время
+    title: Название
     to_home_page: Перейти на главную
     to_program: К программе
     topic: Тема

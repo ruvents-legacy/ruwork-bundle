@@ -32,6 +32,7 @@ title:
     exhibition_space: Exhibition space
     faq: Faq
     feedback: Feedback
+    first_name: First name
     foreign_company: Foreign company
     form: Form
     free_hotline: Free hotline
@@ -52,6 +53,7 @@ title:
     investors: Investors
     job_position: Job position
     jury: Jury
+    last_name: Last name
     logistics: Logistics
     menu: Menu
     message: Message
@@ -77,9 +79,12 @@ title:
     partner: Partner
     partners: Partners
     partners_and_sponsors: Partners and sponsors
+    password: Password
     password_recovery: Password recovery
+    patronymic: Patronymic
     payment_status: Payment status
     personal_account: Personal account
+    phone: Phone
     photo: Photo
     press_center: Press center
     price: Price
@@ -105,9 +110,9 @@ title:
     strategic_partners: Strategic partners
     subject: Subject
     survey: Survey
-    phone: Phone
     terms_of_use_and_privacy_policy: Terms of use and privacy policy
     time: Time
+    title: Title
     to_home_page: To home page
     to_program: To program
     topic: Topic
