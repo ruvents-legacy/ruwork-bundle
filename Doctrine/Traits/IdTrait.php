@@ -15,9 +15,6 @@ trait IdTrait
      */
     protected $id = 0;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;

@@ -5,7 +5,7 @@ namespace Ruvents\RuworkBundle\Doctrine\Traits;
 use Doctrine\ORM\Mapping as ORM;
 use Ruvents\DoctrineBundle\Annotations\Mapping\UpdateTimestamp;
 
-trait UpdatedAtTrait
+trait UpdateTimeTrait
 {
     /**
      * @ORM\Column(type="datetimetz_immutable")
@@ -14,13 +14,10 @@ trait UpdatedAtTrait
      *
      * @var \DateTimeImmutable
      */
-    protected $updatedAt;
+    protected $updateTime;
 
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getUpdatedAt(): \DateTimeImmutable
+    public function getUpdateTime(): \DateTimeImmutable
     {
-        return $this->updatedAt;
+        return $this->updateTime;
     }
 }

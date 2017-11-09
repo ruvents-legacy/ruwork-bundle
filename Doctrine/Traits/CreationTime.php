@@ -5,7 +5,7 @@ namespace Ruvents\RuworkBundle\Doctrine\Traits;
 use Doctrine\ORM\Mapping as ORM;
 use Ruvents\DoctrineBundle\Annotations\Mapping\PersistTimestamp;
 
-trait CreatedAtTrait
+trait CreationTime
 {
     /**
      * @ORM\Column(type="datetimetz_immutable")
@@ -14,13 +14,10 @@ trait CreatedAtTrait
      *
      * @var \DateTimeImmutable
      */
-    protected $createdAt;
+    protected $creationTime;
 
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getCreatedAt(): \DateTimeImmutable
+    public function getCreationTime(): \DateTimeImmutable
     {
-        return $this->createdAt;
+        return $this->creationTime;
     }
 }

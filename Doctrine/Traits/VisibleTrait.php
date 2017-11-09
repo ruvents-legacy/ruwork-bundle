@@ -13,19 +13,11 @@ trait VisibleTrait
      */
     public $visible = true;
 
-    /**
-     * @return bool
-     */
     public function isVisible(): bool
     {
         return $this->visible;
     }
 
-    /**
-     * @param bool $visible
-     *
-     * @return $this
-     */
     public function setVisible(bool $visible)
     {
         $this->visible = $visible;
