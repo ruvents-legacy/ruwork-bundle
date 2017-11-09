@@ -4,6 +4,8 @@ services:
         autoconfigure: true
         public: false
 
+    Ruvents\RuworkBundle\Controller\RemoveTrailingSlashController: ~
+
     Ruvents\RuworkBundle\Doctrine\NamingStrategy\RuworkNamingStrategy: ~
 
     Ruvents\RuworkBundle\EventListener\RedirectControllerListener:
