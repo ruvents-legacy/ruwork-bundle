@@ -17,6 +17,10 @@ services:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
+    Ruvents\RuworkBundle\Form\TypeExtension\TextTypeEmptyDataStringExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\TextType }
+
     Ruvents\RuworkBundle\Mailer\Mailer:
         $swift: "@mailer"
 
