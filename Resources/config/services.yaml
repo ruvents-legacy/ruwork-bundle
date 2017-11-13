@@ -28,6 +28,8 @@ services:
         tags:
             - { name: monolog.processor, method: processRecord, channel: request }
 
+    Ruvents\RuworkBundle\Security\UserPasswordHelper: ~
+
     Ruvents\RuworkBundle\Serializer\Encoder\ExcelCsvEncoder: ~
 
     Ruvents\RuworkBundle\Validator\Constraints\AliasValidator: ~
