@@ -11,9 +11,6 @@ use Symfony\Component\Validator\Constraints\FileValidator;
  */
 class Document extends File
 {
-    /**
-     * @var string[]
-     */
     public $mimeTypes = [
         'application/excel',
         'application/mspowerpoint',
@@ -38,12 +35,13 @@ class Document extends File
         'application/vnd.openxmlformats-officedocument.spreadsheetml.template',
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
-        'image/*',
+        'image/gif',
+        'image/jpeg',
+        'image/pjpeg',
+        'image/png',
+        'image/svg+xml',
     ];
 
-    /**
-     * @var string
-     */
     public $mimeTypesMessage = 'document_invalid_mime_type';
 
     /**
