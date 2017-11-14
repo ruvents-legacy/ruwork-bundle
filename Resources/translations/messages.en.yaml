@@ -10,6 +10,9 @@ title:
     all_speakers: All speakers
     and: and
     chat: Chat
+    choose_additional_communication_language: Choose additional communication language
+    choose_main_communication_language: Choose the main communication language
+    communication_languages: Communication languages
     company: Company
     conference: Conference
     conference_timeline: Conference timeline
@@ -23,6 +26,9 @@ title:
     countries_partners: Countries-partners
     country: Country
     date: Date
+    date_of_birth: Date of birth
+    date_of_expiry: Date of expiry
+    date_of_issue: Date of issue
     daytime: Daytime
     documents: Documents
     email: Email
@@ -32,6 +38,7 @@ title:
     exhibition_space: Exhibition space
     faq: Faq
     feedback: Feedback
+    female: Female
     first_name: First name
     foreign_company: Foreign company
     form: Form
@@ -56,6 +63,7 @@ title:
     jury: Jury
     last_name: Last name
     logistics: Logistics
+    male: Male
     menu: Menu
     message: Message
     moderator: Moderator
@@ -66,6 +74,7 @@ title:
     name: Name
     news: News
     news_and_events: News and events
+    none: None
     of_user_aggreement: of the user aggreement
     official_partner: Official partner
     official_partners: Official partners
@@ -81,6 +90,8 @@ title:
     partner: Partner
     partners: Partners
     partners_and_sponsors: Partners and sponsors
+    passport_date_of_expiry: Passport date of expiry
+    passport_date_of_issue: Passport date of issue
     password: Password
     password_recovery: Password recovery
     patronymic: Patronymic
@@ -100,6 +111,7 @@ title:
     section: Section
     sections: Sections
     session: Session
+    sex: Sex
     speaker: Speaker
     speaker_in_sections: Speaker in sections
     speaker_in_sessions: Speaker in sessions

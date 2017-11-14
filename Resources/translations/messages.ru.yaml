@@ -10,6 +10,9 @@ title:
     all_speakers: Все спикеры
     and: и
     chat: Чат
+    choose_additional_communication_language: Выберите дополнительный язык коммуникации
+    choose_main_communication_language: Выберите основной язык коммуникации
+    communication_languages: Языки коммуникации
     company: Компания
     conference: Конференция
     conference_timeline: Таймлайн конференции
@@ -23,6 +26,9 @@ title:
     countries_partners: Страны-партнеры
     country: Страна
     date: Дата
+    date_of_birth: Дата рождения
+    date_of_expiry: Срок действия
+    date_of_issue: Дата выдачи
     daytime: День
     documents: Документы
     email: Email
@@ -32,6 +38,7 @@ title:
     exhibition_space: Выставочное пространство
     faq: FAQ
     feedback: Отзывы
+    female: Женский
     first_name: Имя
     foreign_company: Зарубежная компания
     form: Форма
@@ -56,6 +63,7 @@ title:
     jury: Жюри
     last_name: Фамилия
     logistics: Логистика
+    male: Мужской
     menu: Меню
     message: Сообщение
     moderator: Модератор
@@ -66,6 +74,7 @@ title:
     name: Имя
     news: Новости
     news_and_events: Новости и события
+    none: Нет
     of_user_agreement: пользовательского соглашения
     official_partner: Официальный партнер
     official_partners: Официальные партнеры
@@ -81,6 +90,8 @@ title:
     partner: Партнер
     partners: Партнеры
     partners_and_sponsors: Партнеры и спонсоры
+    passport_date_of_expiry: Срок действия паспорта
+    passport_date_of_issue: Дата выдачи паспорта
     password: Пароль
     password_recovery: Восстановление пароля
     patronymic: Отчество
@@ -100,6 +111,7 @@ title:
     section: Секция
     sections: Секции
     session: Сессия
+    sex: Пол
     speaker: Спикер
     speaker_in_sections: Спикер в секциях
     speaker_in_sessions: Спикер в сессиях
