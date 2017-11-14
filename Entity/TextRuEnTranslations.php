@@ -7,25 +7,21 @@ use Ruvents\DoctrineBundle\Translations\AbstractTranslations;
 
 /**
  * @ORM\Embeddable()
- *
- * @deprecated Since version 0.5.17. To be removed in 0.6.0.
  */
-class RuEnTranslations extends AbstractTranslations
+class TextRuEnTranslations extends AbstractTranslations
 {
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
-    protected $ru;
+    protected $ru = '';
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
-    protected $en;
+    protected $en = '';
 
-    public function __construct(string $ru = null, string $en = null)
+    public function __construct(string $ru = '', string $en = '')
     {
-        @trigger_error(sprintf('Class %s is deprecated since version 0.5.17. To be removed in 0.6.0. Use %s instead.', __CLASS__, TextRuEnTranslations::class), E_USER_DEPRECATED);
-
         $this->ru = $ru;
         $this->en = $en;
 
@@ -48,24 +44,24 @@ class RuEnTranslations extends AbstractTranslations
         return (string)$this->getCurrent(true);
     }
 
-    public function getRu(): ?string
+    public function getRu(): string
     {
         return $this->ru;
     }
 
-    public function setRu(?string $ru)
+    public function setRu(string $ru)
     {
         $this->ru = $ru;
 
         return $this;
     }
 
-    public function getEn(): ?string
+    public function getEn(): string
     {
         return $this->en;
     }
 
-    public function setEn(?string $en)
+    public function setEn(string $en)
     {
         $this->en = $en;
 
