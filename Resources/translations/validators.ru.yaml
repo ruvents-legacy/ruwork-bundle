@@ -15,5 +15,6 @@ This collection should contain exactly {{ limit }} element.|This collection shou
     Это поле должно содержать содержать ровно {{ limit }} элемента.|
     Это поле должно содержать содержать ровно {{ limit }} элементов.
 
-document_invalid_mime_type: >
-    Недопустимый тип файла. Разрешены изображения и документы формата PDF, Word, Excel, PowerPoint.
+document_invalid_mime_type: Недопустимый тип файла. Допускаются изображения формата JPEG, PNG, GIF, SVG и документы формата PDF, Word, Excel, PowerPoint.
+
+raster_image_invalid_mime_type: Недопустимый тип файла. Допускаются изображения формата JPEG, PNG.

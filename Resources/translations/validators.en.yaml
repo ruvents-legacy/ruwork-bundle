@@ -12,5 +12,6 @@ This collection should contain exactly {{ limit }} element.|This collection shou
     This field should contain exactly {{ limit }} element.|
     This field should contain exactly {{ limit }} elements.
 
-document_invalid_mime_type: >
-    Invalid file type. Only images and PDF, Word, Excel, PowerPoint documents are allowed.
+document_invalid_mime_type: Invalid file type. Only JPEG, PNG, GIF, SVG images and PDF, Word, Excel, PowerPoint documents are allowed.
+
+raster_image_invalid_mime_type: Invalid file type. Only JPEG and PNG images are allowed.
