@@ -11,16 +11,16 @@ use Ruvents\DoctrineBundle\Translations\AbstractTranslations;
 class TextRuEnTranslations extends AbstractTranslations
 {
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
-    protected $ru = '';
+    protected $ru;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
-    protected $en = '';
+    protected $en;
 
-    public function __construct(string $ru = '', string $en = '')
+    public function __construct(string $ru = null, string $en = null)
     {
         $this->ru = $ru;
         $this->en = $en;
@@ -44,24 +44,24 @@ class TextRuEnTranslations extends AbstractTranslations
         return (string)$this->getCurrent(true);
     }
 
-    public function getRu(): string
+    public function getRu(): ?string
     {
         return $this->ru;
     }
 
-    public function setRu(string $ru)
+    public function setRu(?string $ru)
     {
         $this->ru = $ru;
 
         return $this;
     }
 
-    public function getEn(): string
+    public function getEn(): ?string
     {
         return $this->en;
     }
 
-    public function setEn(string $en)
+    public function setEn(?string $en)
     {
         $this->en = $en;
 
