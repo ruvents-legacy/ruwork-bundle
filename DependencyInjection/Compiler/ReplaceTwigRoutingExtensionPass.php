@@ -6,7 +6,7 @@ use Ruvents\RuworkBundle\Twig\Extension\RoutingExtension;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class TwigRoutingExtensionPass implements CompilerPassInterface
+class ReplaceTwigRoutingExtensionPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
