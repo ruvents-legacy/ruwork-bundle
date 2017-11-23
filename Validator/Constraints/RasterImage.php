@@ -3,6 +3,7 @@
 namespace Ruvents\RuworkBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\ImageValidator;
 
 /**
  * @Annotation()
@@ -17,4 +18,12 @@ class RasterImage extends Image
     ];
 
     public $mimeTypesMessage = 'raster_image_invalid_mime_type';
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validatedBy()
+    {
+        return ImageValidator::class;
+    }
 }
