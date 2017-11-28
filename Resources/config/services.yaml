@@ -4,6 +4,8 @@ services:
         autoconfigure: true
         public: false
 
+    Ruvents\RuworkBundle\Asset\VersionStrategy\FilemtimeStrategy: ~
+
     Ruvents\RuworkBundle\Controller\RemoveTrailingSlashController: ~
 
     Ruvents\RuworkBundle\Doctrine\NamingStrategy\RuworkNamingStrategy: ~
