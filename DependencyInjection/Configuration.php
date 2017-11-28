@@ -16,6 +16,7 @@ class Configuration implements ConfigurationInterface
             ->root('ruvents_ruwork')
                 ->children()
                     ->arrayNode('assets')
+                        ->addDefaultsIfNotSet()
                         ->children()
                             ->scalarNode('web_dir')
                                 ->defaultValue('%kernel.project_dir%/public')
@@ -72,6 +73,7 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                     ->end()
-                ->end();
+                ->end()
+            ->end();
     }
 }
