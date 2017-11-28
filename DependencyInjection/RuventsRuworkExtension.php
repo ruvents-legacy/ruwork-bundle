@@ -20,10 +20,8 @@ class RuventsRuworkExtension extends ConfigurableExtension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
 
-        if ($config['assets']['enabled']) {
-            $container->register(FilemtimeStrategy::class)
-                ->setArgument('$webDir', $config['assets']['web_dir']);
-        }
+        $container->findDefinition(FilemtimeStrategy::class)
+            ->setArgument('$webDir', $config['assets']['web_dir']);
 
         if ($config['i18n']['enabled']) {
             if ($config['i18n']['suffix_controller_templates']) {

@@ -6,9 +6,6 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 class FilemtimeStrategy implements VersionStrategyInterface
 {
-    /**
-     * @var string
-     */
     private $webDir;
 
     public function __construct(string $webDir)
