@@ -12,8 +12,12 @@ title:
     chat: Чат
     choose_additional_communication_language: Выберите дополнительный язык коммуникации
     choose_main_communication_language: Выберите основной язык коммуникации
+    cities: Города
+    city: Город
+    city_of_residence: Город проживания
     communication_languages: Языки коммуникации
     company: Компания
+    company_location: Местонахождение компании
     conference: Конференция
     conference_timeline: Таймлайн конференции
     consent_to_processing_personal_data: Согласие на обработку персональных данных
@@ -35,6 +39,7 @@ title:
     error_occurred: Возникла ошибка
     evening: Вечер
     exhibition: Выставка
+    exhibition_participant: Участник выставки
     exhibition_space: Выставочное пространство
     faq: FAQ
     feedback: Отзывы
@@ -94,6 +99,7 @@ title:
     passport_date_of_issue: Дата выдачи паспорта
     password: Пароль
     password_recovery: Восстановление пароля
+    passwords_must_match: Пароли должны совпадать
     patronymic: Отчество
     payment_status: Статус оплаты
     personal_account: Личный кабинет
@@ -106,6 +112,7 @@ title:
     program: Программа
     promo_code: Промо-код
     registration: Регистрация
+    repeat_password: Повторите пароль
     residency: Резиденство
     russian_company: Российская компания
     section: Секция

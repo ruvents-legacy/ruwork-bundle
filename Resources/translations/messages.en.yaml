@@ -12,8 +12,12 @@ title:
     chat: Chat
     choose_additional_communication_language: Choose additional communication language
     choose_main_communication_language: Choose the main communication language
+    cities: Cities
+    city: City
+    city_of_residence: City of residence
     communication_languages: Communication languages
     company: Company
+    company_location: Company location
     conference: Conference
     conference_timeline: Conference timeline
     consent_to_processing_personal_data: Consent to processing personal data
@@ -35,6 +39,7 @@ title:
     error_occurred: Error occurred
     evening: Evening
     exhibition: Exhibition
+    exhibition_participant: Exhibition participant
     exhibition_space: Exhibition space
     faq: Faq
     feedback: Feedback
@@ -94,6 +99,7 @@ title:
     passport_date_of_issue: Passport date of issue
     password: Password
     password_recovery: Password recovery
+    passwords_must_match: Passwords must match
     patronymic: Patronymic
     payment_status: Payment status
     personal_account: Personal account
@@ -106,6 +112,7 @@ title:
     program: Program
     promo_code: Promo code
     registration: Registration
+    repeat_password: Repeat password
     residency: Residency
     russian_company: Russian company
     section: Section
