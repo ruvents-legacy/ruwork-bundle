@@ -9,6 +9,7 @@ title:
     all_rights_reserved: Все права защищены
     all_speakers: Все спикеры
     and: и
+    archive: Архив
     chat: Чат
     choose_additional_communication_language: Выберите дополнительный язык коммуникации
     choose_main_communication_language: Выберите основной язык коммуникации
@@ -114,6 +115,8 @@ title:
     registration: Регистрация
     repeat_password: Повторите пароль
     residency: Резиденство
+    review: Отзыв
+    reviews: Отзывы
     russian_company: Российская компания
     section: Секция
     sections: Секции

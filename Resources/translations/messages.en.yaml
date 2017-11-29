@@ -9,6 +9,7 @@ title:
     all_rights_reserved: All rights reserved
     all_speakers: All speakers
     and: and
+    archive: Archive
     chat: Chat
     choose_additional_communication_language: Choose additional communication language
     choose_main_communication_language: Choose the main communication language
@@ -114,6 +115,8 @@ title:
     registration: Registration
     repeat_password: Repeat password
     residency: Residency
+    review: Review
+    reviews: Reviews
     russian_company: Russian company
     section: Section
     sections: Sections
