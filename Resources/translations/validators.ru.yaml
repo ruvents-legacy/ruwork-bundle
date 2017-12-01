@@ -18,3 +18,5 @@ This collection should contain exactly {{ limit }} element.|This collection shou
 document_invalid_mime_type: Недопустимый тип файла. Допускаются изображения формата JPEG, PNG, GIF, SVG и документы формата PDF, Word, Excel, PowerPoint.
 
 raster_image_invalid_mime_type: Недопустимый тип файла. Допускаются изображения формата JPEG, PNG.
+
+passwords_must_match: Пароли должны совпадать.

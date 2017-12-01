@@ -100,7 +100,6 @@ title:
     passport_date_of_issue: Passport date of issue
     password: Password
     password_recovery: Password recovery
-    passwords_must_match: Passwords must match
     patronymic: Patronymic
     payment_status: Payment status
     personal_account: Personal account

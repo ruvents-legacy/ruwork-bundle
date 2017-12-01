@@ -15,3 +15,5 @@ This collection should contain exactly {{ limit }} element.|This collection shou
 document_invalid_mime_type: Invalid file type. Only JPEG, PNG, GIF, SVG images and PDF, Word, Excel, PowerPoint documents are allowed.
 
 raster_image_invalid_mime_type: Invalid file type. Only JPEG and PNG images are allowed.
+
+passwords_must_match: Passwords must match.
