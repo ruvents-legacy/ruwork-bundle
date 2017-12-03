@@ -39,7 +39,6 @@ class ConditionValidator extends ConstraintValidator
         if ($condition) {
             $context->getValidator()
                 ->inContext($context)
-                ->atPath($context->getPropertyPath())
                 ->validate($value, $constraint->true);
         }
     }
