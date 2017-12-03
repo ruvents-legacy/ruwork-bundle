@@ -15,8 +15,10 @@ This collection should contain exactly {{ limit }} element.|This collection shou
     Это поле должно содержать содержать ровно {{ limit }} элемента.|
     Это поле должно содержать содержать ровно {{ limit }} элементов.
 
-document_invalid_mime_type: Недопустимый тип файла. Допускаются изображения формата JPEG, PNG, GIF, SVG и документы формата PDF, Word, Excel, PowerPoint.
+document_invalid_mime_type: Недопустимый тип файла. Разрешены только изображения JPEG, PNG, GIF, SVG и документы PDF, Word, Excel, PowerPoint.
 
-raster_image_invalid_mime_type: Недопустимый тип файла. Допускаются изображения формата JPEG, PNG.
+power_point_invalid_mime_type: Недопустимый тип файла. Разрешены только документы PowerPoint.
+
+raster_image_invalid_mime_type: Недопустимый тип файла. Разрешены только изображения JPEG, PNG.
 
 passwords_must_match: Пароли должны совпадать.
