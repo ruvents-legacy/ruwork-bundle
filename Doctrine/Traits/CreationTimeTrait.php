@@ -3,7 +3,7 @@
 namespace Ruvents\RuworkBundle\Doctrine\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ruvents\DoctrineBundle\Annotations\Mapping\PersistTimestamp;
+use Ruvents\DoctrineBundle\Mapping\PersistTimestamp;
 
 trait CreationTimeTrait
 {

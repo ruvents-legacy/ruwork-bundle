@@ -24,24 +24,11 @@ class TextRuEnTranslations extends AbstractTranslations
     {
         $this->ru = $ru;
         $this->en = $en;
-
-        parent::__construct();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getLocalesMap(): array
-    {
-        return [
-            'ru' => true,
-            'en' => true,
-        ];
     }
 
     public function __toString()
     {
-        return (string)$this->getCurrent(true);
+        return (string) $this->getCurrent();
     }
 
     public function getRu(): ?string
@@ -66,5 +53,24 @@ class TextRuEnTranslations extends AbstractTranslations
         $this->en = $en;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefaultCurrentLocale(): string
+    {
+        return 'ru';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getFallbackLocales(): array
+    {
+        return [
+            'ru',
+            'en',
+        ];
     }
 }
