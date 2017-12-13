@@ -26,11 +26,6 @@ class TextRuEnTranslations extends AbstractTranslations
         $this->en = $en;
     }
 
-    public function __toString()
-    {
-        return (string) $this->getCurrent();
-    }
-
     public function getRu(): ?string
     {
         return $this->ru;
@@ -58,19 +53,9 @@ class TextRuEnTranslations extends AbstractTranslations
     /**
      * {@inheritdoc}
      */
-    protected function getDefaultCurrentLocale(): string
+    protected function getFallbackLocales(): \Generator
     {
-        return 'ru';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getFallbackLocales(): array
-    {
-        return [
-            'ru',
-            'en',
-        ];
+        yield 'ru';
+        yield 'en';
     }
 }
