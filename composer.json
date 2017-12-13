@@ -17,7 +17,7 @@
         "doctrine/inflector": "^1.2",
         "doctrine/orm": "^2.5",
         "egulias/email-validator": "^2.1",
-        "ruvents/doctrine-bundle": "^0.5@dev",
+        "ruvents/doctrine-bundle": "^0.5",
         "sensio/framework-extra-bundle": "^5.0",
         "swiftmailer/swiftmailer": "^6.0",
         "symfony/asset": "^3.4 || ^4.0",
