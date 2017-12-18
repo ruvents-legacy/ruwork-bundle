@@ -3,8 +3,8 @@
 namespace Ruvents\RuworkBundle\Doctrine\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ruvents\DoctrineBundle\Mapping\PersistTimestamp;
-use Ruvents\DoctrineBundle\Mapping\UpdateTimestamp;
+use Ruwork\DoctrineBehaviorsBundle\Mapping\PersistTimestamp;
+use Ruwork\DoctrineBehaviorsBundle\Mapping\UpdateTimestamp;
 
 trait UpdateTimeTrait
 {

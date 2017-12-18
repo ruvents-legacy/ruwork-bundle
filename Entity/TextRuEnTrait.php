@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ruvents\RuworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ruvents\DoctrineBundle\Translations\AbstractTranslations;
+use Ruwork\DoctrineBehaviorsBundle\Multilingual\AbstractMultilingual;
 
-/**
- * @ORM\Embeddable()
- */
-class TextRuEnTranslations extends AbstractTranslations
+trait TextRuEnTrait
 {
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -51,7 +50,7 @@ class TextRuEnTranslations extends AbstractTranslations
     }
 
     /**
-     * {@inheritdoc}
+     * @see AbstractMultilingual::getFallbackLocales()
      */
     protected function getFallbackLocales(): \Generator
     {
